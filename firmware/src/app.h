@@ -60,7 +60,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 
-//#include "DefMenuGen.h"     // paramètres du génerateur
+#include "DefMenuGen.h"     // paramètres du génerateur
 
 // *****************************************************************************
 // *****************************************************************************

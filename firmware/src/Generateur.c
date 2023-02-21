@@ -27,7 +27,7 @@ void  GENSIG_Initialize(S_ParamGen *pParam)
   
 
 // Mise à jour de la periode d'échantillonage
-void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
+/*void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
 {
     int periode;
     periode = 1/(*pParam->Frequence);
@@ -66,7 +66,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     }
         
    
-}
+}*/
 
 
 // Execution du générateur
@@ -83,10 +83,10 @@ void  GENSIG_Execute(void)
    SPI_WriteToDac(0, Step * EchNb );      // sur canal 0
    EchNb++;
    //si EchNB est supperieur à 100 
-   if(EchNb > MAX_ECH)
+   /*if(EchNb > MAX_ECH)
    {
        //remettre à 0
        EchNb = 0;
-   }
-   //EchNb = EchNb % MAX_ECH;
+   }*/
+   EchNb = EchNb % MAX_ECH;
 }

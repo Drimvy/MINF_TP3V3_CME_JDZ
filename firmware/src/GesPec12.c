@@ -69,7 +69,7 @@ S_Pec12_Descriptor Pec12;
 //     __________                       __________________
 // A:            |_____________________|        
 
-void ScanPec12 (bool ValA, bool ValB, bool ValPB)
+/*void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 {
      //déclaration des variables;
 	//Val encodeur;
@@ -186,10 +186,10 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 	OLD_ValPB = ValPB;
 	OLD_ValAB = ValAB;
    
- } // ScanPec12
+ } // ScanPec12*/
 
 
-void Pec12Init (void)
+/*void Pec12Init (void)
 {
    // Initialisation des descripteurs de touches Pec12
    DebounceInit(&DescrA);
@@ -205,7 +205,7 @@ void Pec12Init (void)
     Pec12.PressDuration = 0;   // Pour durée pression du P.B.
     Pec12.InactivityDuration = 0; // Durée inactivité
   
- } // Pec12Init
+ } // Pec12Init */
 
 
 

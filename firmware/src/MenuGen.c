@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include "MenuGen.h"
 
+
 #define MAX_ECH 100
 
 // Initialisation du menu et des paramètres
@@ -21,11 +22,11 @@ void MENU_Initialize(S_ParamGen *pParam)
 // Execution du menu, appel cyclique depuis l'application
 void MENU_Execute(S_ParamGen *pParam)
 {
-    static uint16_t EchNb = 0;
+    /*static uint16_t EchNb = 0;
     const uint16_t step = 65535 / MAX_ECH;
     SPI_WriteToDac(0,step*EchNb);
     EchNb ++;
-    EchNb = EchNb % MAX_ECH;
+    EchNb = EchNb % MAX_ECH;*/
 }
 
 

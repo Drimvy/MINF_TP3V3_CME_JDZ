@@ -153,20 +153,28 @@ void APP_Tasks ( void )
             SPI_InitLTC2604();
 
             // Initialisation PEC12
-            Pec12Init();
+            //Pec12Init();
 
             // Initialisation du menu
-            MENU_Initialize(&LocalParamGen);
+            //MENU_Initialize(&LocalParamGen);
 
             // Initialisation du generateur
-            GENSIG_Initialize(&LocalParamGen);
+            //GENSIG_Initialize(&LocalParamGen);
             
-            printf_lcd("Canevas Tp3       ");
+            printf_lcd("Tp3 GenSig 22-23");
             // A adapter pour les 2 noms sur 2 lignes
             lcd_gotoxy(1,2);
-            printf_lcd("C. Huber 03.02.2016");
-
-     
+            printf_lcd("Caroline Mieville");
+            lcd_gotoxy(1,3);
+            printf_lcd("Julien Decreuza");
+            
+            /* initialisation des timers */
+            // DRV_TMR0_Start();  
+            DRV_TMR0_Start ();
+            // DRV_TMR1_Start();  
+            DRV_TMR1_Start ();           
+            // DRV_TMR2_Start();  
+            DRV_TMR2_Start ();   
             appData.state = APP_STATE_WAIT;
             break;
         }
@@ -177,7 +185,7 @@ void APP_Tasks ( void )
         }
        case APP_STATE_SERVICE_TASKS:
        {
-            BSP_LEDToggle(BSP_LED_2);
+            LED2_W = !LED2_R;;
 
             // Execution du menu
             MENU_Execute(&LocalParamGen);

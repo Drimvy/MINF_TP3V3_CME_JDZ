@@ -76,14 +76,15 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 void __ISR(_TIMER_1_VECTOR, ipl3AUTO) IntHandlerDrvTmrInstance0(void)
 {
     int static ATTENDRE = 0;
-    int static NCYCLE = 3000;
-    ScanPec12();
+    int static NCYCLE = 2999;
+    //ScanPec12();
     LED1_W = !LED1_R;
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
-    if(ATTENDRE = NCYCLE )
+    if(ATTENDRE == NCYCLE )
     {
+       
         APP_UpdateState(APP_STATE_SERVICE_TASKS);
-        NCYCLE = 10;
+        NCYCLE = 9;
         ATTENDRE = 0;
     }
     else
