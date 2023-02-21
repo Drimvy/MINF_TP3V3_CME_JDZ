@@ -62,6 +62,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "app.h"
 #include "system_definitions.h"
+#include "GesPec12.h"
+#include "Generateur.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -70,6 +72,36 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
  
-/*******************************************************************************
+
+void __ISR(_TIMER_1_VECTOR, ipl3AUTO) IntHandlerDrvTmrInstance0(void)
+{
+    int static ATTENDRE = 0;
+    int static NCYCLE = 3000;
+    ScanPec12();
+    LED1_W = !LED1_R;
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
+    if(ATTENDRE = NCYCLE )
+    {
+        APP_UpdateState(APP_STATE_SERVICE_TASKS);
+        NCYCLE = 10;
+        ATTENDRE = 0;
+    }
+    else
+    {
+       ATTENDRE ++; 
+    }
+}
+void __ISR(_TIMER_2_VECTOR, ipl0AUTO) IntHandlerDrvTmrInstance1(void)
+{
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
+}
+void __ISR(_TIMER_3_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance2(void)
+{
+    LED0_W = 1;
+    GENSIG_Execute();
+    PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_3);
+    LED0_W = 0;
+}
+ /*******************************************************************************
  End of File
 */

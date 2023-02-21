@@ -125,7 +125,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
                     //sens horaire;
                 if (OLD_ValAB==0x00)
                 {
-                    ValPec.DEC = ValPec.DEC ++ ;
+                    Pec12.Dec = Pec12IsMinus ();
                     Compt_AFK = 0;//Pec12ClearInactivity 
                 }
                 else
@@ -162,12 +162,12 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 	{
 		if ((Compt_BT < 500))
 		{
-			ValPec.OK = Pec12IsOK(); 
+			Pec12.OK = Pec12IsOK(); 
 			Compt_BT = 0;
 		}
 		else
 		{
-			ValPec.ESC = Pec12IsESC;
+			Pec12.ESC = Pec12IsESC;
 			Compt_BT = 0;
 		}
 	}
@@ -177,7 +177,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 	}
 	if (Compt_AFK >= 5000)
 	{
-		lcd_bl_off()
+		lcd_bl_off();
 	}
 	else
 	{
@@ -213,26 +213,31 @@ void Pec12Init (void)
 
 //       Pec12IsPlus       true indique un nouveau incrément
 bool Pec12IsPlus    (void) {
+    Pec12.Inc = 1;
    return (Pec12.Inc);
 }
 
 //       Pec12IsMinus      true indique un nouveau décrément
 bool Pec12IsMinus    (void) {
+    Pec12.Dec  = 1;
    return (Pec12.Dec);
 }
 
 //       Pec12IsOK         true indique action OK
 bool Pec12IsOK    (void) {
+    Pec12.OK  = 1;
    return (Pec12.OK);
 }
 
 //       Pec12IsESC        true indique action ESC
 bool Pec12IsESC    (void) {
+    Pec12.ESC = 1;
    return (Pec12.ESC);
 }
 
 //       Pec12NoActivity   true indique abscence d'activité sur PEC12
 bool Pec12NoActivity    (void) {
+    Pec12.NoActivity  = 1;
    return (Pec12.NoActivity);
 }
 
