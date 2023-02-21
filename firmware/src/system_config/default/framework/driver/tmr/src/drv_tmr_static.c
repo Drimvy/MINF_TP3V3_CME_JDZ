@@ -509,6 +509,7 @@ static bool                   DRV_TMR2_Running;
 // *****************************************************************************
 void DRV_TMR2_Initialize(void)
 {   
+    int periode_TM3 = 79999;
     /* Initialize Timer Instance2 */
     /* Disable Timer */
     PLIB_TMR_Stop(TMR_ID_3);
@@ -521,7 +522,7 @@ void DRV_TMR2_Initialize(void)
     /* Clear counter */ 
     PLIB_TMR_Counter16BitClear(TMR_ID_3);
     /*Set period */ 
-    PLIB_TMR_Period16BitSet(TMR_ID_3, 79999);
+    PLIB_TMR_Period16BitSet(TMR_ID_3, periode_TM3);
     /* Setup Interrupt */   
     PLIB_INT_VectorPrioritySet(INT_ID_0, INT_VECTOR_T3, INT_PRIORITY_LEVEL7);
     PLIB_INT_VectorSubPrioritySet(INT_ID_0, INT_VECTOR_T3, INT_SUBPRIORITY_LEVEL0);          
