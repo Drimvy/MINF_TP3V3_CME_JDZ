@@ -125,7 +125,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
                     //sens horaire;
                 if (OLD_ValAB==0x00)
                 {
-                    ValPec.DEC = ValPec.DEC ++ ;
+                    Pec12.Inc = Pec12.Inc ++ ;
                     Compt_AFK = 0;//Pec12ClearInactivity 
                 }
                 else
@@ -162,12 +162,12 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 	{
 		if ((Compt_BT < 500))
 		{
-			ValPec.OK = Pec12IsOK(); 
+			Pec12.OK = Pec12IsOK(); 
 			Compt_BT = 0;
 		}
 		else
 		{
-			ValPec.ESC = Pec12IsESC;
+			Pec12.ESC = Pec12IsESC();
 			Compt_BT = 0;
 		}
 	}
@@ -177,7 +177,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 	}
 	if (Compt_AFK >= 5000)
 	{
-		lcd_bl_off()
+		lcd_bl_off();
 	}
 	else
 	{

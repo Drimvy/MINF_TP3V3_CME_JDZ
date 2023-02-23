@@ -10,11 +10,37 @@
 #include <stdbool.h>
 #include "MenuGen.h"
 
+#include "DefMenuGen.h"
+#include "Mc32DriverLcd.h"
+#include "bsp.h"
+
+
 #define MAX_ECH 100
 
 // Initialisation du menu et des paramètres
 void MENU_Initialize(S_ParamGen *pParam)
 {
+      //INIT DE TOUTES LES VALEURS DE GESTION
+    pParam->Forme = SignalSinus;
+    pParam->Frequence = 100;        //Hz
+    pParam->Amplitude = 100;        //mV
+    pParam->Offset = 0;             //mV
+    
+    
+    //AFFICHAGE DU MENU INITIAL
+    lcd_bl_on();
+    
+    lcd_gotoxy(2,1);
+    printf_lcd("Forme = %c", &pParam->Forme);         //ligne 1
+    
+    lcd_gotoxy(2,2);    
+    printf_lcd("Freq [Hz] = %d", &pParam->Frequence); //ligne 2
+    
+    lcd_gotoxy(2,3);    
+    printf_lcd("Ampl [mV] = %d", &pParam->Amplitude); //ligne 3
+    
+    lcd_gotoxy(2,4);    
+    printf_lcd("Offset [mV] = %d", &pParam->Offset);  //ligne 4
 }
 
 
@@ -26,6 +52,14 @@ void MENU_Execute(S_ParamGen *pParam)
     SPI_WriteToDac(0,step*EchNb);
     EchNb ++;
     EchNb = EchNb % MAX_ECH;
+    
+    //UTILISANT LES FONCTIONS DU PEC12 + BTN -> REPONDS AUX REGLAGES DE L'UTILISATEUR
+    //ET APPELLE LES FCT DE MàJ DU GENERATEUR
+    
+    //FCT PREVUE POUR UN APPEL CYCLIQUE -> BASEE SUR UNE MACHINE D'ETAT + NON-BLOQUANTE
+    
+    
+    
 }
 
 
