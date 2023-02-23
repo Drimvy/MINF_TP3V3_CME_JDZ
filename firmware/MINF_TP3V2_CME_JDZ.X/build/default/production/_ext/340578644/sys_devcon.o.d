@@ -1,6 +1,10 @@
 build/default/production/_ext/340578644/sys_devcon.o: \
  ../src/system_config/default/framework/system/devcon/src/sys_devcon.c \
+<<<<<<< HEAD
  ../../../../../../framework/system/devcon/src/sys_devcon_local.h \
+=======
+ ../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h \
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
  ../src/system_config/default/system_config.h \
  ../../../../../../bsp/pic32mx_skes/bsp.h \
  ../../../../../../framework/peripheral/ports/plib_ports.h \
@@ -54,7 +58,11 @@ build/default/production/_ext/340578644/sys_devcon.o: \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteControl_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h \
+<<<<<<< HEAD
  ../../../../../../framework/system/devcon/sys_devcon.h \
+=======
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
@@ -152,7 +160,11 @@ build/default/production/_ext/340578644/sys_devcon.o: \
  ../../../../../../framework/peripheral/osc/processor/../templates/osc_PLLBypass_Unsupported.h \
  ../../../../../../framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h
 
+<<<<<<< HEAD
 ../../../../../../framework/system/devcon/src/sys_devcon_local.h:
+=======
+../src/system_config/default/framework/system/devcon/src/sys_devcon_local.h:
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../src/system_config/default/system_config.h:
 
@@ -260,7 +272,11 @@ build/default/production/_ext/340578644/sys_devcon.o: \
 
 ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h:
 
+<<<<<<< HEAD
 ../../../../../../framework/system/devcon/sys_devcon.h:
+=======
+../src/system_config/default/framework/system/devcon/sys_devcon.h:
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../../../../../../framework/system/system.h:
 

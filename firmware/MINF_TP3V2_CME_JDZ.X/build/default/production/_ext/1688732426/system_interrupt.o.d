@@ -56,7 +56,11 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h \
  ../src/system_config/default/system_definitions.h \
  ../../../../../../framework/system/common/sys_module.h \
+<<<<<<< HEAD
  ../../../../../../framework/system/devcon/sys_devcon.h \
+=======
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -136,9 +140,21 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
  ../../../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Unsupported.h \
  ../../../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h \
  ../../../../../../framework/system/int/sys_int_mapping.h \
+<<<<<<< HEAD
  ../../../../../../framework/system/ports/sys_ports.h \
  ../../../../../../framework/system/ports/sys_ports_definitions.h \
  ../src/system_config/default/system_definitions.h
+=======
+ ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
+ ../../../../../../framework/driver/tmr/drv_tmr.h \
+ ../../../../../../framework/driver/driver_common.h \
+ ../../../../../../framework/driver/tmr/tmr_definitions_pic32m.h \
+ ../../../../../../framework/driver/tmr/drv_tmr_compatibility.h \
+ ../../../../../../framework/system/ports/sys_ports.h \
+ ../../../../../../framework/system/ports/sys_ports_definitions.h \
+ ../src/DefMenuGen.h ../src/system_config/default/system_definitions.h \
+ ../src/GesPec12.h ../src/Generateur.h
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../../../../../../framework/system/common/sys_common.h:
 
@@ -254,7 +270,11 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
 
 ../../../../../../framework/system/common/sys_module.h:
 
+<<<<<<< HEAD
 ../../../../../../framework/system/devcon/sys_devcon.h:
+=======
+../src/system_config/default/framework/system/devcon/sys_devcon.h:
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../../../../../../framework/system/system.h:
 
@@ -414,8 +434,31 @@ build/default/production/_ext/1688732426/system_interrupt.o: \
 
 ../../../../../../framework/system/int/sys_int_mapping.h:
 
+<<<<<<< HEAD
+=======
+../src/system_config/default/framework/driver/tmr/drv_tmr_static.h:
+
+../../../../../../framework/driver/tmr/drv_tmr.h:
+
+../../../../../../framework/driver/driver_common.h:
+
+../../../../../../framework/driver/tmr/tmr_definitions_pic32m.h:
+
+../../../../../../framework/driver/tmr/drv_tmr_compatibility.h:
+
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 ../../../../../../framework/system/ports/sys_ports.h:
 
 ../../../../../../framework/system/ports/sys_ports_definitions.h:
 
+<<<<<<< HEAD
 ../src/system_config/default/system_definitions.h:
+=======
+../src/DefMenuGen.h:
+
+../src/system_config/default/system_definitions.h:
+
+../src/GesPec12.h:
+
+../src/Generateur.h:
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad

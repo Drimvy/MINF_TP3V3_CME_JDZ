@@ -1,4 +1,5 @@
 build/default/production/_ext/1360937237/MenuGen.o: ../src/MenuGen.c \
+<<<<<<< HEAD
  ../src/MenuGen.h ../src/DefMenuGen.h \
  ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
  ../../../../../../bsp/pic32mx_skes/bsp.h \
@@ -53,10 +54,14 @@ build/default/production/_ext/1360937237/MenuGen.o: ../src/MenuGen.c \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteControl_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h
+=======
+ ../src/MenuGen.h ../src/DefMenuGen.h
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../src/MenuGen.h:
 
 ../src/DefMenuGen.h:
+<<<<<<< HEAD
 
 ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h:
 
@@ -163,3 +168,5 @@ build/default/production/_ext/1360937237/MenuGen.o: ../src/MenuGen.c \
 ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h:
 
 ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h:
+=======
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad

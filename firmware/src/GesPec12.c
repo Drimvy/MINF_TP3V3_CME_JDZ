@@ -69,7 +69,7 @@ S_Pec12_Descriptor Pec12;
 //     __________                       __________________
 // A:            |_____________________|        
 
-void ScanPec12 (bool ValA, bool ValB, bool ValPB)
+/*void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 {
      //déclaration des variables;
 	//Val encodeur;
@@ -125,7 +125,11 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
                     //sens horaire;
                 if (OLD_ValAB==0x00)
                 {
+<<<<<<< HEAD
                     Pec12.Inc = Pec12.Inc ++ ;
+=======
+                    Pec12.Dec = Pec12IsMinus ();
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
                     Compt_AFK = 0;//Pec12ClearInactivity 
                 }
                 else
@@ -167,7 +171,11 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 		}
 		else
 		{
+<<<<<<< HEAD
 			Pec12.ESC = Pec12IsESC();
+=======
+			Pec12.ESC = Pec12IsESC;
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 			Compt_BT = 0;
 		}
 	}
@@ -186,10 +194,10 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 	OLD_ValPB = ValPB;
 	OLD_ValAB = ValAB;
    
- } // ScanPec12
+ } // ScanPec12*/
 
 
-void Pec12Init (void)
+/*void Pec12Init (void)
 {
    // Initialisation des descripteurs de touches Pec12
    DebounceInit(&DescrA);
@@ -205,7 +213,7 @@ void Pec12Init (void)
     Pec12.PressDuration = 0;   // Pour durée pression du P.B.
     Pec12.InactivityDuration = 0; // Durée inactivité
   
- } // Pec12Init
+ } // Pec12Init */
 
 
 
@@ -213,26 +221,31 @@ void Pec12Init (void)
 
 //       Pec12IsPlus       true indique un nouveau incrément
 bool Pec12IsPlus    (void) {
+    Pec12.Inc = 1;
    return (Pec12.Inc);
 }
 
 //       Pec12IsMinus      true indique un nouveau décrément
 bool Pec12IsMinus    (void) {
+    Pec12.Dec  = 1;
    return (Pec12.Dec);
 }
 
 //       Pec12IsOK         true indique action OK
 bool Pec12IsOK    (void) {
+    Pec12.OK  = 1;
    return (Pec12.OK);
 }
 
 //       Pec12IsESC        true indique action ESC
 bool Pec12IsESC    (void) {
+    Pec12.ESC = 1;
    return (Pec12.ESC);
 }
 
 //       Pec12NoActivity   true indique abscence d'activité sur PEC12
 bool Pec12NoActivity    (void) {
+    Pec12.NoActivity  = 1;
    return (Pec12.NoActivity);
 }
 

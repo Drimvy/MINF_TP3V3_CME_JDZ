@@ -52,7 +52,11 @@ build/default/production/_ext/326400065/bsp.o: \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteControl_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h \
+<<<<<<< HEAD
  ../../../../../../framework/system/devcon/sys_devcon.h \
+=======
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
@@ -180,7 +184,11 @@ build/default/production/_ext/326400065/bsp.o: \
 
 ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h:
 
+<<<<<<< HEAD
 ../../../../../../framework/system/devcon/sys_devcon.h:
+=======
+../src/system_config/default/framework/system/devcon/sys_devcon.h:
+>>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../../../../../../framework/system/system.h:
 
