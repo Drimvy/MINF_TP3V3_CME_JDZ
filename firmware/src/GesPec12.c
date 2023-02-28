@@ -93,11 +93,14 @@ S_Pec12_Descriptor Pec12;
    ValAB = ValAB << 4;
    //entrer la valeur de B sur byte LSB de ValAB
    ValAB = ValAB | DescrB.bits.KeyReleased;
+   DescrB.bits.KeyPrevInputValue
    // Détection incrément / décrément
    Compt_AFK ++ ;
    // Traitement du PushButton
    //si lors de la valeur de valAB est différant que la précedente
    if (ValAB != OLD_ValAB)
+    //    if ((DescrA.bits.KeyPressed == 0) && (DescrA.bits.KeyPrevInputValue == 1) && (DescrB.bits.KeyPressed == 1) ||
+    //            (DescrA.bits.KeyPressed == 1) && (DescrA.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyPressed == 0))
    {
         switch (ValAB)
         {
@@ -111,7 +114,7 @@ S_Pec12_Descriptor Pec12;
 				//sens anti horaire;
                 if (OLD_ValAB==0x00)
                 {
-                    Pec12.Inc = Pec12.Inc ++ ;
+                    Pec12.Inc = Pec12IsPlus ;
                     Compt_AFK = 0;//Pec12ClearInactivity 
                 }
                 else

@@ -17,14 +17,56 @@
 
 // T.P. 2016 100 echantillons
 #define MAX_ECH 100
+#define VAL_TIC_MAX 32768
 
 int tb_Amplitude[MAX_ECH];
 
 // Initialisation du  générateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
 { 
-      
     pParam->Amplitude = 10000;
+    S_Amplitude Ampli;
+    uint16_t static Offset = 0;
+    int i;
+
+    
+    //gestion de l'amplitude 
+    Ampli.Nb_Tic = (pParam->Amplitude * VAL_TIC_MAX /10000);
+    Ampli.Min = (VAL_TIC_MAX)-(Ampli.Nb_Tic);
+    Ampli.Max =(VAL_TIC_MAX-1)+(Ampli.Nb_Tic);
+    
+     //gestion de l'offest
+    Offset = (pParam->Offset*(VAL_TIC_MAX/10000));
+
+ //test
+    
+            
+      for(i = 0; i < 100; i++)
+            {
+          
+                uint8_t a = 0;
+                if(i < 25 )
+                {
+                    a = (Ampli.Nb_Tic/10000)/24;       
+                    tb_Amplitude[i] =  pParam->Amplitude *(a*i)+ VAL_TIC_MAX + Offset ;      
+                }
+                else if((i >= 25) && (i < 75))
+                {
+                    tb_Amplitude[i] = pParam->Amplitude *(a*i)+ VAL_TIC_MAX + VAL_TIC_MAX*2 + Offset ;
+                }
+                else if( i >= 75)
+                {
+                    tb_Amplitude[i] = pParam->Amplitude *(a*(i-75))+ Offset ;
+                }
+            }
+            
+    
+}          
+            
+            
+            
+            
+   /*         pParam->Amplitude = 10000;
     pParam->Forme = "SignalDentDeScie";
     pParam->Frequence = 100;
     pParam->Offset = 0;
@@ -54,9 +96,18 @@ void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
 // Mise à jour du signal (forme, amplitude, offset)
 void  GENSIG_UpdateSignal(S_ParamGen *pParam)
 {
-    uint16_t static Ampli = 0;
+    S_Amplitude Ampli;
     uint16_t static Offset = 0;
     int i;
+    
+    //gestion de l'amplitude 
+    Ampli.Nb_Tic = (pParam->Amplitude * VAL_TIC_MAX /10000);
+    Ampli.Min = (VAL_TIC_MAX/2)-(Ampli.Nb_Tic/2);
+    Ampli.Max =(VAL_TIC_MAX/2)+(Ampli.Nb_Tic/2);
+    
+    //gestion de l'offest
+    Offset = (pParam->Offset*(VAL_TIC_MAX)/5000);
+            
     
     //---Gestion de la seclection des formes des signaux---/ 
     //Sélection forme
@@ -69,7 +120,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
         {
             for( i = 0; i < 100; i++)
             {
-                tb_Amplitude[i] = ((4/M_PI * sin( M_PI *(3.6*i)/180))*(65536/1.28))+ Offset;
+                tb_Amplitude[i] = (Ampli.Nb_Tic/1.28)*(4/M_PI * sin( M_PI *(3.6*i)/180))+VAL_TIC_MAX+ Offset;
             }
         
          break;
@@ -84,11 +135,11 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             {
                 if(i < 50 )
                 {
-                    tb_Amplitude[i] = (Ampli/(MAX_ECH/2)*i)+Offset ;
+                    tb_Amplitude[i] = (Ampli.Nb_Tic/(MAX_ECH/2)*i)+Ampli.Min+Offset ;
                 }
                 else
                 {
-                    tb_Amplitude[i] = ((Ampli/50)*(49-(i-50)))+ Offset ;
+                    tb_Amplitude[i] = ((Ampli.Nb_Tic/50)*(49-(i-50)))+Ampli.Min+ Offset ;
                 }
                 
             }
@@ -99,11 +150,11 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
         case "SignalDentDeScie":
         {
             uint16_t static Step;
-            Step = (Ampli / MAX_ECH) ;
+            Step = ((Ampli.Nb_Tic*2) / MAX_ECH);
             
             for( i = 0; i < 100; i++)
             {
-                tb_Amplitude[i] = (Step * i) + Offset;
+                tb_Amplitude[i] = (Step * i)+ Ampli.Min + Offset;
             }
 
         break;
@@ -117,21 +168,21 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             {
                 if(i < 50 )
                 {
-                    tb_Amplitude[i] = (Ampli/2)+Offset ;
+                    tb_Amplitude[i] = Ampli.Max +Offset ;
                 }
                 else
                 {
-                    tb_Amplitude[i] = ~((Ampli/2)+Offset) ;
-                }
-                
-            }
+                    tb_Amplitude[i] = Ampli.Min +Offset;
+                }                   
+
+            } 
         
         break;
         }
     }
         
    
-}
+}*/
 
 
 // Execution du générateur
@@ -143,6 +194,10 @@ void  GENSIG_Execute(void)
     //Initaliser EchNb à 0 en static
    static uint16_t EchNb = 0;
    //initialiser les steps
+   if(tb_Amplitude[EchNb] > (VAL_TIC_MAX*2)-1)
+   {
+       tb_Amplitude[EchNb] = (VAL_TIC_MAX*2)-1;
+   }
    SPI_WriteToDac(0, tb_Amplitude[EchNb]);
    EchNb++;
    
