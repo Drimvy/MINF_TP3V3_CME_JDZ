@@ -143,6 +143,7 @@ void APP_Tasks ( void )
     /* Check the application's current state. */
     switch ( appData.state )
     {
+        
         /* Application's initial state. */
         case APP_STATE_INIT:
         {
@@ -151,6 +152,7 @@ void APP_Tasks ( void )
 
             // Init SPI DAC
             SPI_InitLTC2604();
+            
 
             // Initialisation PEC12
             //Pec12Init();
@@ -159,7 +161,7 @@ void APP_Tasks ( void )
             //MENU_Initialize(&LocalParamGen);
 
             // Initialisation du generateur
-            //GENSIG_Initialize(&LocalParamGen);
+            GENSIG_Initialize(&LocalParamGen);
             
             printf_lcd("Tp3 GenSig 22-23");
             // A adapter pour les 2 noms sur 2 lignes
@@ -175,6 +177,8 @@ void APP_Tasks ( void )
             DRV_TMR1_Start ();           
             // DRV_TMR2_Start();  
             DRV_TMR2_Start ();   
+            
+            
             appData.state = APP_STATE_WAIT;
             break;
         }
