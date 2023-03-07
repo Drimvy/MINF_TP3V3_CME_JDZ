@@ -10,15 +10,14 @@
 #include <stdbool.h>
 #include "MenuGen.h"
 
-<<<<<<< HEAD
 #include "DefMenuGen.h"
 #include "Mc32DriverLcd.h"
 #include "bsp.h"
+#include "GesPec12.h"
 
-=======
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 #define MAX_ECH 100
+
 
 // Initialisation du menu et des paramètres
 void MENU_Initialize(S_ParamGen *pParam)
@@ -50,12 +49,18 @@ void MENU_Initialize(S_ParamGen *pParam)
 // Execution du menu, appel cyclique depuis l'application
 void MENU_Execute(S_ParamGen *pParam)
 {
+      
+    
+    
+    
+    
     /*static uint16_t EchNb = 0;
     const uint16_t step = 65535 / MAX_ECH;
     SPI_WriteToDac(0,step*EchNb);
     EchNb ++;
 <<<<<<< HEAD
-    EchNb = EchNb % MAX_ECH;
+    EchNb = EchNb % MAX_ECH;*/
+     
     
     //UTILISANT LES FONCTIONS DU PEC12 + BTN -> REPONDS AUX REGLAGES DE L'UTILISATEUR
     //ET APPELLE LES FCT DE MàJ DU GENERATEUR
@@ -64,9 +69,7 @@ void MENU_Execute(S_ParamGen *pParam)
     
     
     
-=======
-    EchNb = EchNb % MAX_ECH;*/
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
+    //EchNb = EchNb % MAX_ECH;
 }
 
 

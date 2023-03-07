@@ -55,11 +55,7 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
  ../src/system_config/default/system_definitions.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
-<<<<<<< HEAD
- ../../../../../../framework/system/devcon/sys_devcon.h \
-=======
  ../src/system_config/default/framework/system/devcon/sys_devcon.h \
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -139,13 +135,6 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
  ../../../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Unsupported.h \
  ../../../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h \
  ../../../../../../framework/system/int/sys_int_mapping.h \
-<<<<<<< HEAD
- ../../../../../../framework/system/ports/sys_ports.h \
- ../../../../../../framework/system/ports/sys_ports_definitions.h \
- ../src/app.h ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
- ../src/Mc32gestSpiDac.h ../src/MenuGen.h ../src/DefMenuGen.h \
- ../src/GesPec12.h ../src/Generateur.h
-=======
  ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../framework/driver/tmr/drv_tmr.h \
  ../../../../../../framework/driver/driver_common.h \
@@ -157,7 +146,6 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
  ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
  ../src/Mc32gestSpiDac.h ../src/MenuGen.h ../src/GesPec12.h \
  ../src/Generateur.h
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../src/app.h:
 
@@ -273,11 +261,7 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
 
 ../../../../../../framework/system/common/sys_module.h:
 
-<<<<<<< HEAD
-../../../../../../framework/system/devcon/sys_devcon.h:
-=======
 ../src/system_config/default/framework/system/devcon/sys_devcon.h:
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../../../../../../framework/system/system.h:
 
@@ -437,8 +421,6 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
 
 ../../../../../../framework/system/int/sys_int_mapping.h:
 
-<<<<<<< HEAD
-=======
 ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h:
 
 ../../../../../../framework/driver/tmr/drv_tmr.h:
@@ -449,29 +431,20 @@ build/default/production/_ext/1360937237/app.o: ../src/app.c ../src/app.h \
 
 ../../../../../../framework/driver/tmr/drv_tmr_compatibility.h:
 
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 ../../../../../../framework/system/ports/sys_ports.h:
 
 ../../../../../../framework/system/ports/sys_ports_definitions.h:
 
 ../src/app.h:
 
-<<<<<<< HEAD
-=======
 ../src/DefMenuGen.h:
 
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h:
 
 ../src/Mc32gestSpiDac.h:
 
 ../src/MenuGen.h:
 
-<<<<<<< HEAD
-../src/DefMenuGen.h:
-
-=======
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 ../src/GesPec12.h:
 
 ../src/Generateur.h:

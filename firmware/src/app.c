@@ -166,7 +166,7 @@ void APP_Tasks ( void )
             lcd_gotoxy(1,2);
             printf_lcd("Caroline Mieville");
             lcd_gotoxy(1,3);
-            printf_lcd("Julien Decreuza");
+            printf_lcd("Julien Decrausaz");
             
             /* initialisation des timers */
             // DRV_TMR0_Start();  
@@ -184,12 +184,13 @@ void APP_Tasks ( void )
         break;
         }
        case APP_STATE_SERVICE_TASKS:
-       {
+       {         
             LED2_W = !LED2_R;;
 
             // Execution du menu
             MENU_Execute(&LocalParamGen);
             appData.state = APP_STATE_WAIT;
+            
          break;
         }
         /* TODO: implement your application state machine.*/

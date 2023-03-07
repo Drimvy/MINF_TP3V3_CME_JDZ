@@ -1,8 +1,5 @@
 build/default/production/_ext/1360937237/Generateur.o: \
  ../src/Generateur.c ../src/Generateur.h ../src/DefMenuGen.h \
-<<<<<<< HEAD
- ../src/Mc32gestSpiDac.h
-=======
  ../src/Mc32gestSpiDac.h \
  ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../framework/driver/tmr/drv_tmr.h \
@@ -142,15 +139,12 @@ build/default/production/_ext/1360937237/Generateur.o: \
  ../../../../../../framework/peripheral/osc/processor/../templates/osc_BTPLLClockOut_Unsupported.h \
  ../../../../../../framework/system/clk/sys_clk_compatibility.h \
  ../../../../../../framework/driver/tmr/drv_tmr_compatibility.h
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../src/Generateur.h:
 
 ../src/DefMenuGen.h:
 
 ../src/Mc32gestSpiDac.h:
-<<<<<<< HEAD
-=======
 
 ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h:
 
@@ -427,4 +421,3 @@ build/default/production/_ext/1360937237/Generateur.o: \
 ../../../../../../framework/system/clk/sys_clk_compatibility.h:
 
 ../../../../../../framework/driver/tmr/drv_tmr_compatibility.h:
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad

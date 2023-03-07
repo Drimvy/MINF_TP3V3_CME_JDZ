@@ -509,7 +509,6 @@ static bool                   DRV_TMR2_Running;
 // *****************************************************************************
 void DRV_TMR2_Initialize(void)
 {   
-    int periode_TM3 = 79999;
     /* Initialize Timer Instance2 */
     /* Disable Timer */
     PLIB_TMR_Stop(TMR_ID_3);

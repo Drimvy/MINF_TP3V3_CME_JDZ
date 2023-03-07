@@ -56,11 +56,7 @@ build/default/production/_ext/1360937237/Mc32SpiUtil.o: \
  ../src/system_config/default/system_definitions.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
-<<<<<<< HEAD
- ../../../../../../framework/system/devcon/sys_devcon.h \
-=======
  ../src/system_config/default/framework/system/devcon/sys_devcon.h \
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -140,11 +136,6 @@ build/default/production/_ext/1360937237/Mc32SpiUtil.o: \
  ../../../../../../framework/peripheral/int/processor/../templates/int_VariableOffset_Unsupported.h \
  ../../../../../../framework/peripheral/int/processor/../templates/int_SoftwareNMI_Unsupported.h \
  ../../../../../../framework/system/int/sys_int_mapping.h \
-<<<<<<< HEAD
- ../../../../../../framework/system/ports/sys_ports.h \
- ../../../../../../framework/system/ports/sys_ports_definitions.h \
- ../src/app.h ../src/Mc32SpiUtil.h \
-=======
  ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../framework/driver/tmr/drv_tmr.h \
  ../../../../../../framework/driver/driver_common.h \
@@ -153,7 +144,6 @@ build/default/production/_ext/1360937237/Mc32SpiUtil.o: \
  ../../../../../../framework/system/ports/sys_ports.h \
  ../../../../../../framework/system/ports/sys_ports_definitions.h \
  ../src/app.h ../src/DefMenuGen.h ../src/Mc32SpiUtil.h \
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
  ../../../../../../framework/peripheral\SPI\plib_spi.h \
  ../../../../../../framework/peripheral/spi/processor/spi_processor.h \
  ../../../../../../framework/peripheral/spi/processor/spi_p32xxxx.h \
@@ -313,11 +303,7 @@ build/default/production/_ext/1360937237/Mc32SpiUtil.o: \
 
 ../../../../../../framework/system/common/sys_module.h:
 
-<<<<<<< HEAD
-../../../../../../framework/system/devcon/sys_devcon.h:
-=======
 ../src/system_config/default/framework/system/devcon/sys_devcon.h:
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 
 ../../../../../../framework/system/system.h:
 
@@ -477,8 +463,6 @@ build/default/production/_ext/1360937237/Mc32SpiUtil.o: \
 
 ../../../../../../framework/system/int/sys_int_mapping.h:
 
-<<<<<<< HEAD
-=======
 ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h:
 
 ../../../../../../framework/driver/tmr/drv_tmr.h:
@@ -489,18 +473,14 @@ build/default/production/_ext/1360937237/Mc32SpiUtil.o: \
 
 ../../../../../../framework/driver/tmr/drv_tmr_compatibility.h:
 
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 ../../../../../../framework/system/ports/sys_ports.h:
 
 ../../../../../../framework/system/ports/sys_ports_definitions.h:
 
 ../src/app.h:
 
-<<<<<<< HEAD
-=======
 ../src/DefMenuGen.h:
 
->>>>>>> c3d542c1bcf1366d822d56c3708f938bb63ed1ad
 ../src/Mc32SpiUtil.h:
 
 ../../../../../../framework/peripheral\SPI\plib_spi.h:
