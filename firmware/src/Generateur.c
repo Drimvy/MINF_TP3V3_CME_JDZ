@@ -7,6 +7,7 @@
 
 // Migration sur PIC32 30.04.2014 C. Huber
 
+//version final le 07.03.2023 - CME 
 
 #include "Generateur.h"
 #include "DefMenuGen.h"
