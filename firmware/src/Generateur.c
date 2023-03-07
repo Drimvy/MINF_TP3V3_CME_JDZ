@@ -23,59 +23,11 @@ int tb_Amplitude[MAX_ECH];
 
 // Initialisation du  générateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
-{ 
-    pParam->Amplitude = 2000;
-    S_Amplitude Ampli;
-    uint16_t static Offset = 0;
-    int i;
-
-    
-    //gestion de l'amplitude 
-    Ampli.Nb_Tic = (pParam->Amplitude * VAL_TIC_MAX /10000);
-    Ampli.Min = (VAL_TIC_MAX)-(Ampli.Nb_Tic);
-    Ampli.Max =(VAL_TIC_MAX-1)+(Ampli.Nb_Tic);
-    
-     //gestion de l'offest
-    Offset = (pParam->Offset*(VAL_TIC_MAX/10000));
-
- //test
-    //intitialiser la constatante de la pente
-    float const a = VAL_TIC_MAX/10000;
-    
-            
-      for(i = 0; i < 100; i++)
-            {
-
-                if (i < 25 )
-                {
-                    //calcul pour la pente montante du triangle (du centre à la val max)
-                    tb_Amplitude[i] = pParam->Amplitude * a/25 * i + VAL_TIC_MAX + Offset;
-                }
-
-                else if ((i < 75) && (i >= 25))
-                {
-                    //calcul pour la pente descendante du triangle (de la val max- la val min)
-                    tb_Amplitude[i] = pParam->Amplitude * (-a/25) * i + VAL_TIC_MAX + Ampli.Nb_Tic + Offset;
-                }
-
-                else if (i >= 75 )
-                {
-                    //calcul pour la pente montante du triangle (de la val min au centre)
-                    tb_Amplitude[i] = pParam->Amplitude * a/25 * (i - 100)+VAL_TIC_MAX + Offset ;
-                }
-            }
-            
-    
-}          
-            
-            
-            
-            
-   /*         pParam->Amplitude = 10000;
-    pParam->Forme = "SignalDentDeScie";
+{           
+    pParam->Amplitude = 10000;
+    pParam->Forme = SignalDentDeScie;
     pParam->Frequence = 100;
-    pParam->Offset = 0;
-    
+    pParam->Offset = 0;   
 }
   
 
@@ -105,9 +57,8 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     //déclaration de....
     S_Amplitude Ampli;
     //intialisation de la variable statique offset
-    uint16_t static Offset = 0;
-    //intitialiser la constatante de la pente
-    uint8_t const a = VAL_TIC_MAX/25;
+    uint16_t Offset;
+    
     //initialisation de l'incrément
     int i;
     
@@ -125,7 +76,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     switch (pParam->Forme)
     {
     //---Entrer l'amplitude dans le tableau pour obtenir un sinus---/  
-        case "SignalSinus":
+        case SignalSinus:
         {
         //boucle for pour remplire le tableau 
             for( i = 0; i < 100; i++)
@@ -136,37 +87,39 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
         
          break;
         }
-    //---Entrer l'amplitude dans le tableau pour obtenir un triangle---/
-        case "SignalTriangle":
+         //---Entrer l'amplitude dans le tableau pour obtenir un triangle---/
+        case SignalTriangle:
         {
-            //boucle for pour remplire le tableau 
+            //intitialiser la constatante de la pente
+            float const a = ((float)VAL_TIC_MAX/(float)10000)/(float)25;
+            float const b = pParam->Amplitude * 65536/10000 + VAL_TIC_MAX;
+
             for(i = 0; i < 100; i++)
             {
-            
+
                 if (i < 25 )
                 {
                     //calcul pour la pente montante du triangle (du centre à la val max)
-                    tb_Amplitude[i] = pParam->Amplitude * a * i + VAL_TIC_MAX + Offset;
+                    tb_Amplitude[i] = (pParam->Amplitude * (a * i)) + VAL_TIC_MAX + Offset;
                 }
-                
+
                 else if ((i < 75) && (i >= 25))
                 {
                     //calcul pour la pente descendante du triangle (de la val max- la val min)
-                    tb_Amplitude[i] = pParam->Amplitude * (-a) * i + VAL_TIC_MAX + Ampli.Nb_Tic + Offset;
+                    tb_Amplitude[i] = (pParam->Amplitude *( (-a) * i) )+ b + Offset;
                 }
-                
+
                 else if (i >= 75 )
                 {
                     //calcul pour la pente montante du triangle (de la val min au centre)
-                    tb_Amplitude[i] = pParam->Amplitude * a * (i - 100)+VAL_TIC_MAX + Offset ;
+                    tb_Amplitude[i] = (pParam->Amplitude *( a * (i - 100)))+VAL_TIC_MAX + Offset ;
                 }
-                
             }
             
         break;
         }
     //---Entrer l'amplitude dans le tableau pour obtenir un dent de scie---/     
-        case "SignalDentDeScie":
+        case SignalDentDeScie:
         {
             //initialiser la variable Sted
             uint16_t static Step;
@@ -186,7 +139,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     //---Entrer l'amplitude dans le tableau pour obtenir un carrée---/
         
         //ne fonctionne pas du tout
-        case "SignalCarre":
+        case SignalCarre:
         {
             for( i = 0; i < 100; i++)
             {
@@ -206,7 +159,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     }
         
    
-}*/
+}
 
 
 // Execution du générateur
@@ -220,8 +173,14 @@ void  GENSIG_Execute(void)
    //Si la valeur max est dépasser; saturation
    if(tb_Amplitude[EchNb] > (VAL_TIC_MAX*2)-1)
    {
-       //obtien la valeur max (65536) dans son tableau
+       //obtien la valeur max (65535) dans son tableau
        tb_Amplitude[EchNb] = (VAL_TIC_MAX*2)-1;
+   }
+   
+   else if (tb_Amplitude[EchNb] < 0)
+   {
+       //obtien la valeur max (65535) dans son tableau
+       tb_Amplitude[EchNb] = 0;
    }
    //incrire la valeur de notre tableau dans le DAC sur le channel 0
    SPI_WriteToDac(0, tb_Amplitude[EchNb]);
@@ -229,15 +188,6 @@ void  GENSIG_Execute(void)
    EchNb++;
    //si EchNB est supperieur à 100  
    EchNb = EchNb % MAX_ECH;
-    
-   //-----ancien code----
-   //const uint16_t Step = (65536 / MAX_ECH);
-   
-   //pourquoi il est à 0?
-   //SPI_WriteToDac(0, Step * EchNb );      // sur canal 0
-   //EchNb++;
-   
   
-   
    
 }
