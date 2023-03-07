@@ -509,6 +509,10 @@ static bool                   DRV_TMR2_Running;
 // *****************************************************************************
 void DRV_TMR2_Initialize(void)
 {   
+<<<<<<< HEAD
+=======
+    
+>>>>>>> b2aaeca84b70b3c66fda3078a17189699756e079
     /* Initialize Timer Instance2 */
     /* Disable Timer */
     PLIB_TMR_Stop(TMR_ID_3);
