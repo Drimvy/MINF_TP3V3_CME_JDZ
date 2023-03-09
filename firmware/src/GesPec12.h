@@ -39,7 +39,7 @@ typedef struct {
             uint8_t Dec : 1;             // événement décrément
             uint8_t OK  : 1;              // événement action OK
             uint8_t ESC : 1;             // événement action ESC
-            uint8_t NoActivity: 1 ;      // Indication de non activité
+            uint8_t NoActivity : 1 ;      // Indication de non activité
             uint16_t PressDuration;   // Pour durée pression du P.B.
             uint16_t InactivityDuration;   // Pour durée inactivité
 } S_Pec12_Descriptor;
@@ -66,16 +66,16 @@ typedef struct {
 // D'ou traitement uniquement au flanc descendand de B
 
 // Dans le sens horaire CW:
-//     __________                      ________________
-// B:            |____________________|
 //     ___________________                       _________
 // A:                     |_____________________|                    
+//     __________                      ________________
+// B:            |____________________|
 
 // Dans le sens anti-horaire CCW:
-//     ____________________                      _________
-// B:                      |____________________|
 //     __________                       __________________
 // A:            |_____________________|        
+//     ____________________                      _________
+// B:                      |____________________|
 
 void ScanPec12 (bool ValA, bool ValB, bool ValPB);
 

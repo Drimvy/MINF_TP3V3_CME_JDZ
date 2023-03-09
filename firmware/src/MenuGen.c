@@ -18,7 +18,11 @@
 
 #define MAX_ECH 100
 
+<<<<<<< HEAD
 E_MENU SELECTION_MENU;
+=======
+
+>>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
 // Initialisation du menu et des paramètres
 void MENU_Initialize(S_ParamGen *pParam)
 {   
@@ -64,11 +68,35 @@ void MENU_Initialize(S_ParamGen *pParam)
 /*Design menu de sauvgade*/
 void Menu_Sauvgarde()
 {
+<<<<<<< HEAD
     Clear_LCD();
     lcd_gotoxy(4,2);    
     printf_lcd("Sauvgarde?"); //ligne 2
     lcd_gotoxy(5,3);    
     printf_lcd("(appui long)"); //ligne 2
+=======
+      //INIT DE TOUTES LES VALEURS DE GESTION
+    pParam->Forme = SignalSinus;
+    pParam->Frequence = 100;        //Hz
+    pParam->Amplitude = 100;        //mV
+    pParam->Offset = 0;             //mV
+    
+    
+    //AFFICHAGE DU MENU INITIAL
+    lcd_bl_on();
+    
+    lcd_gotoxy(2,1);
+    printf_lcd("Forme = %c", &pParam->Forme);         //ligne 1
+    
+    lcd_gotoxy(2,2);    
+    printf_lcd("Freq [Hz] = %d", &pParam->Frequence); //ligne 2
+    
+    lcd_gotoxy(2,3);    
+    printf_lcd("Ampl [mV] = %d", &pParam->Amplitude); //ligne 3
+    
+    lcd_gotoxy(2,4);    
+    printf_lcd("Offset [mV] = %d", &pParam->Offset);  //ligne 4
+>>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
 }
 
 /*Supprimer toutes les ligne du LCD*/
@@ -83,6 +111,7 @@ void Clear_LCD()
 // Execution du menu, appel cyclique depuis l'application
 void MENU_Execute(S_ParamGen *pParam)
 {
+<<<<<<< HEAD
     char Forme_No_Save;
     int16_t Val_No_Save;
     switch (SELECTION_MENU)
@@ -425,6 +454,29 @@ void MENU_Execute(S_ParamGen *pParam)
    
     }
    
+=======
+      
+    
+    
+    
+    
+    /*static uint16_t EchNb = 0;
+    const uint16_t step = 65535 / MAX_ECH;
+    SPI_WriteToDac(0,step*EchNb);
+    EchNb ++;
+<<<<<<< HEAD
+    EchNb = EchNb % MAX_ECH;*/
+     
+    
+    //UTILISANT LES FONCTIONS DU PEC12 + BTN -> REPONDS AUX REGLAGES DE L'UTILISATEUR
+    //ET APPELLE LES FCT DE MàJ DU GENERATEUR
+    
+    //FCT PREVUE POUR UN APPEL CYCLIQUE -> BASEE SUR UNE MACHINE D'ETAT + NON-BLOQUANTE
+    
+    
+    
+    //EchNb = EchNb % MAX_ECH;
+>>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
 }
 
 

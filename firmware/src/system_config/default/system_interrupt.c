@@ -77,20 +77,23 @@ void __ISR(_TIMER_1_VECTOR, ipl3AUTO) IntHandlerDrvTmrInstance0(void)
 {
     int static ATTENDRE = 0;
     int static NCYCLE = 2999;
-    //ScanPec12();
     LED1_W = !LED1_R;
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_1);
+    
+    
     if(ATTENDRE == NCYCLE )
     {
-       
+        ScanPec12(PEC12_A, PEC12_B, PEC12_PB);
         APP_UpdateState(APP_STATE_SERVICE_TASKS);
         NCYCLE = 9;
         ATTENDRE = 0;
+        
     }
     else
     {
        ATTENDRE ++; 
     }
+    
 }
 void __ISR(_TIMER_2_VECTOR, ipl0AUTO) IntHandlerDrvTmrInstance1(void)
 {

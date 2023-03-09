@@ -3,17 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/MenuGen.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/GesPec12.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/DefMenuGen.h</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/app.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/main.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/GesPec12.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/MenuGen.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/system_config/default/framework/driver/tmr/src/drv_tmr_static.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/GesPec12.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/system_config/default/system_interrupt.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/system_config/default/system_tasks.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/Exercices/Ex9_1/firmware/src/Mc32Debounce.c</file>
+=======
+>>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Generateur.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/MenuGen.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/system_config/default/system_interrupt.c</file>
             <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/Mc32DriverLcd.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/app.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Generateur.h</file>
+<<<<<<< HEAD
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/app.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/GesPec12.h</file>
+=======
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/main.c</file>
+>>>>>>> b2aaeca84b70b3c66fda3078a17189699756e079
+>>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
         </group>
     </open-files>
 </project-private>

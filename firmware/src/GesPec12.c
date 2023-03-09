@@ -30,6 +30,8 @@
 #include "Mc32DriverLcd.h"
 #include <stdint.h>
 
+#define AFK_TIME 5000 //Durée d'inactivité avant d'étaindre le rétro-éclairage
+
 // Descripteur des sinaux
 S_SwitchDescriptor DescrA;
 S_SwitchDescriptor DescrB;
@@ -69,6 +71,48 @@ S_Pec12_Descriptor Pec12;
 //     __________                       __________________
 // A:            |_____________________|        
 
+<<<<<<< HEAD
+void ScanPec12 (bool ValA, bool ValB, bool ValPB)
+{   
+    //Traitement ainti-rebond sur A, B et PB
+    DoDebounce (&DescrA, ValA);
+    DoDebounce (&DescrB, ValB);
+    DoDebounce (&DescrPB, ValPB);
+    
+    
+            //=================================//
+            // Détection Incrément / Décrément //
+            //=================================//
+    
+    //Détection flanc descendant sur B
+    if(DebounceIsPressed(&DescrB)){
+        // Quittance de l'événement
+        DebounceClearPressed(&DescrB);
+
+        if ( DebounceGetInput (&DescrA) == 0)
+        {
+           // Si A = 0 : situation CW = incrément
+           Pec12.Inc = 1;
+           Pec12ClearInactivity();
+        } 
+         else
+        {
+            Pec12.Dec = 1;
+            Pec12ClearInactivity();
+        }
+    }
+    
+    
+    
+            //===========================//
+            // Traitement du Push Button //
+            //===========================//
+    
+    if(DebounceIsPressed(&DescrPB)){
+
+        Pec12.PressDuration++; //Incrément de 1
+        Pec12ClearInactivity();
+=======
 /*void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 {
      //déclaration des variables;
@@ -146,69 +190,59 @@ S_Pec12_Descriptor Pec12;
                     //erreur;
                 break; 
 		}  
+>>>>>>> b2aaeca84b70b3c66fda3078a17189699756e079
     }
     else
-	{
-		//ne rien faire;
-	}
-   // Gestion inactivité
-	if (ValPB == 1)
-	{
-		Compt_BT++;
-		Compt_AFK = 0;//Pec12ClearInactivity 
-	}
-	else
-	{
-		//ne rien faire;
-	}
-	if ((OLD_ValPB == 1) && (ValPB == 0))
-	{
-		if ((Compt_BT < 500))
-		{
-			Pec12.OK = Pec12IsOK(); 
-			Compt_BT = 0;
-		}
-		else
-		{
-			Pec12.ESC = Pec12IsESC;
-			Compt_BT = 0;
-		}
-	}
+    { 
+        Pec12.PressDuration = 0; //Remise à 0
+    }
+    
+    
+    if(DebounceIsReleased(&DescrPB))
+    {
+        DebounceClearReleased(&DescrPB); // Quittance de l'événement
+        
+        Pec12ClearInactivity();   
+    }
+    
+    
+    
+            //====================//
+            // Gestion inactivité //
+            //====================//
+    
+    if(Pec12.InactivityDuration >= AFK_TIME)
+    {
+        lcd_bl_off(); //Eclairage LCD éteint
+    }
     else
-	{
-		//ne rien faire;
-	}
-	if (Compt_AFK >= 5000)
-	{
-		lcd_bl_off();
-	}
-	else
-	{
-		//ne rien faire;
-	}
-	OLD_ValPB = ValPB;
-	OLD_ValAB = ValAB;
-   
- } // ScanPec12*/
+    {
+        Pec12.InactivityDuration += 1;
+    }
+    
+    
+    
+    /*
+    if((Pec12.Inc || Pec12.Dec || Pec12.OK || Pec12.ESC) == 0)
+    {
+        Pec12.NoActivity = 1;
+        Pec12.InactivityDuration++;
+        
+        if(Pec12.InactivityDuration >= 5000)
+        {
+            lcd_bl_off(); //Eclairage LCD éteint
+            Pec12.InactivityDuration = 0;
+        }
+    }
+    else
+    {
+        lcd_bl_on();
+        Pec12ClearInactivity(); 
+    }*/
+
+} //end of ScanPec12
 
 
-/*void Pec12Init (void)
-{
-   // Initialisation des descripteurs de touches Pec12
-   DebounceInit(&DescrA);
-   DebounceInit(&DescrB);
-   DebounceInit(&DescrPB);
-   
-   // Init de la structure PEc12
-    Pec12.Inc = 0;             // événement incrément  
-    Pec12.Dec = 0;             // événement décrément 
-    Pec12.OK = 0;              // événement action OK
-    Pec12.ESC = 0;             // événement action ESC
-    Pec12.NoActivity = 0;      // Indication d'activité
-    Pec12.PressDuration = 0;   // Pour durée pression du P.B.
-    Pec12.InactivityDuration = 0; // Durée inactivité
-  
- } // Pec12Init */
 
 
 
