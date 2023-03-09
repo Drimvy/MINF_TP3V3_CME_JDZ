@@ -1,8 +1,8 @@
 // Tp3  manipulation MenuGen avec PEC12
 // C. HUBER  10/02/2015 pour SLO2 2014-2015
 // Fichier MenuGen.c
-// Gestion du menu  du générateur
-// Traitement cyclique à 10 ms
+// Gestion du menu  du gÃ©nÃ©rateur
+// Traitement cyclique Ã  10 ms
 
 
 
@@ -18,16 +18,14 @@
 
 #define MAX_ECH 100
 
-<<<<<<< HEAD
-E_MENU SELECTION_MENU;
-=======
 
->>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
-// Initialisation du menu et des paramètres
+E_MENU SELECTION_MENU;
+
+// Initialisation du menu et des paramÃ¨tres
 void MENU_Initialize(S_ParamGen *pParam)
 {   
      /* //INIT DE TOUTES LES VALEURS DE GESTION
-    //Valeur on déja été init dans void  GENSIG_Initialize(S_ParamGen *pParam)
+    //Valeur on dÃ©ja Ã©tÃ© init dans void  GENSIG_Initialize(S_ParamGen *pParam)
      
     pParam->Forme = SignalDentDeScie;
     pParam->Frequence = 100;        //Hz
@@ -60,7 +58,7 @@ void MENU_Initialize(S_ParamGen *pParam)
     lcd_gotoxy(17,4);
     printf_lcd("%4d", pParam->Forme);
    
-    //initaliser première paramètre à pointer dans le menu
+    //initaliser premiÃ¨re paramÃ¨tre Ã  pointer dans le menu
     SELECTION_MENU = MENU_FORME;
     
 }
@@ -68,13 +66,13 @@ void MENU_Initialize(S_ParamGen *pParam)
 /*Design menu de sauvgade*/
 void Menu_Sauvgarde()
 {
-<<<<<<< HEAD
+
     Clear_LCD();
     lcd_gotoxy(4,2);    
     printf_lcd("Sauvgarde?"); //ligne 2
     lcd_gotoxy(5,3);    
     printf_lcd("(appui long)"); //ligne 2
-=======
+
       //INIT DE TOUTES LES VALEURS DE GESTION
     pParam->Forme = SignalSinus;
     pParam->Frequence = 100;        //Hz
@@ -96,7 +94,7 @@ void Menu_Sauvgarde()
     
     lcd_gotoxy(2,4);    
     printf_lcd("Offset [mV] = %d", &pParam->Offset);  //ligne 4
->>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
+
 }
 
 /*Supprimer toutes les ligne du LCD*/
@@ -111,7 +109,7 @@ void Clear_LCD()
 // Execution du menu, appel cyclique depuis l'application
 void MENU_Execute(S_ParamGen *pParam)
 {
-<<<<<<< HEAD
+
     char Forme_No_Save;
     int16_t Val_No_Save;
     switch (SELECTION_MENU)
@@ -147,32 +145,32 @@ void MENU_Execute(S_ParamGen *pParam)
             //incrementer la forme
             if (Pec12IsPlus == 1)
             {
-                //test si égal à la ...
+                //test si Ã©gal Ã  la ...
                 if(Forme_No_Save == "SignalCarre" )
                 {
                     Val_No_Save = "SignalSinus";
                 }
-                //sinon incrémenter pour obtenir la nouvelle forme
+                //sinon incrÃ©menter pour obtenir la nouvelle forme
                 else
                 {
                     Forme_No_Save = Forme_No_Save + 1;
                 } 
             }
-            //décrementer la frome
+            //dÃ©crementer la frome
             else if (Pec12IsMinus == 1)
             {
-                //test si égal ...
+                //test si Ã©gal ...
                 if(Val_No_Save == "SignalSinus" )
                 {
                     Val_No_Save = "SignalCarre";
                 }
-                //sinon décrémenter pour obtenir la nouvelle forme
+                //sinon dÃ©crÃ©menter pour obtenir la nouvelle forme
                 else
                 {
                     Forme_No_Save = Forme_No_Save -1;
                 }
             }
-            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne forme en mémoire
+            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne forme en mÃ©moire
             else if (Pec12IsESC == 1)
             {
                 SELECTION_MENU = MENU_FORME;
@@ -224,41 +222,41 @@ void MENU_Execute(S_ParamGen *pParam)
         
         case MENU_FREQU_VALEUR:
         {
-            //afiicher un "?" sur la 2 ème ligne, 1 ère colonne
+            //afiicher un "?" sur la 2 Ã¨me ligne, 1 Ã¨re colonne
             lcd_gotoxy(1,2);
             printf_lcd("?");
-            //récuperer la valeur de la fréquence, l'enregister sur la variable
+            //rÃ©cuperer la valeur de la frÃ©quence, l'enregister sur la variable
             Forme_No_Save = pParam->Frequence;
             
-            //incrementer la valeur de la fréquence
+            //incrementer la valeur de la frÃ©quence
             if (Pec12IsPlus == 1)
             {
-                //test si suppérieur ou égal à la fréquence max
+                //test si suppÃ©rieur ou Ã©gal Ã  la frÃ©quence max
                 if(Val_No_Save >= 2000 )
                 {
                     Val_No_Save = 2000;
                 }
-                //sinon incrémenter par pas de 20
+                //sinon incrÃ©menter par pas de 20
                 else
                 {
                     Val_No_Save = Val_No_Save +20;
                 } 
             }
-            //décrementer la valeur de la fréquence
+            //dÃ©crementer la valeur de la frÃ©quence
             else if (Pec12IsMinus == 1)
             {
-                //test si inférieur ou égal à la fréquence min
+                //test si infÃ©rieur ou Ã©gal Ã  la frÃ©quence min
                 if(Val_No_Save <= 20 )
                 {
                     Val_No_Save = 20;
                 }
-                //sinon décrémenter par pas de 20
+                //sinon dÃ©crÃ©menter par pas de 20
                 else
                 {
                     Val_No_Save = Val_No_Save -20;
                 }
             }
-            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en mémoire 
+            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en mÃ©moire 
             else if (Pec12IsESC == 1)
             {
                 SELECTION_MENU = MENU_FREQU;
@@ -307,41 +305,41 @@ void MENU_Execute(S_ParamGen *pParam)
         }
         case MENU_AMPLI_VALEUR:
         {
-            //afiicher un "?" sur la 3 ème ligne, 1 ère colonne
+            //afiicher un "?" sur la 3 Ã¨me ligne, 1 Ã¨re colonne
             lcd_gotoxy(1,3);
             printf_lcd("?");
-            //récuperer la valeur de l'amplitude, l'enregister sur la variable
+            //rÃ©cuperer la valeur de l'amplitude, l'enregister sur la variable
             Forme_No_Save = pParam->Amplitude;
             
             //incrementer la valeur de l'amplitude 
             if (Pec12IsPlus == 1)
             {
-                //test si suppérieur ou égal à l'amplitude max
+                //test si suppÃ©rieur ou Ã©gal Ã  l'amplitude max
                 if(Val_No_Save >= 10000 )
                 {
                     Val_No_Save = 2000;
                 }
-                //sinon incrémenter par pas de 100
+                //sinon incrÃ©menter par pas de 100
                 else
                 {
                     Val_No_Save = Val_No_Save +100;
                 } 
             }
-            //décrementer la valeur de l'amplitude 
+            //dÃ©crementer la valeur de l'amplitude 
             else if (Pec12IsMinus == 1)
             {
-                //test si inférieur ou égal à l'amplitude min
+                //test si infÃ©rieur ou Ã©gal Ã  l'amplitude min
                 if(Val_No_Save <= 0 )
                 {
                     Val_No_Save = 0;
                 }
-                //sinon décrémenter par pas de 100
+                //sinon dÃ©crÃ©menter par pas de 100
                 else
                 {
                     Val_No_Save = Val_No_Save -100;
                 }
             }
-            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en mémoire 
+            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en mÃ©moire 
             else if (Pec12IsESC == 1)
             {
                 SELECTION_MENU = MENU_AMPLI;
@@ -389,41 +387,41 @@ void MENU_Execute(S_ParamGen *pParam)
         }
         case MENU_OFFSET_VALEUR:
         {
-            //afiicher un "?" sur la 4 ème ligne, 1 ère colonne
+            //afiicher un "?" sur la 4 Ã¨me ligne, 1 Ã¨re colonne
             lcd_gotoxy(1,4);
             printf_lcd("?");
-            //récuperer la valeur de l'offset, l'enregister sur la variable
+            //rÃ©cuperer la valeur de l'offset, l'enregister sur la variable
             Forme_No_Save = pParam->Offset;
             
             //incrementer la valeur de l'amplitude 
             if (Pec12IsPlus == 1)
             {
-                //test si suppérieur ou égal à l'offset max
+                //test si suppÃ©rieur ou Ã©gal Ã  l'offset max
                 if(Val_No_Save >= 5000 )
                 {
                     Val_No_Save = 5000;
                 }
-                //sinon incrémenter par pas de 100
+                //sinon incrÃ©menter par pas de 100
                 else
                 {
                     Val_No_Save = Val_No_Save +100;
                 } 
             }
-            //décrementer la valeur de l'offset
+            //dÃ©crementer la valeur de l'offset
             else if (Pec12IsMinus == 1)
             {
-                //test si inférieur ou égal à l'offset min
+                //test si infÃ©rieur ou Ã©gal Ã  l'offset min
                 if(Val_No_Save <= -5000 )
                 {
                     Val_No_Save = -5000;
                 }
-                //sinon décrémenter par pas de 100
+                //sinon dÃ©crÃ©menter par pas de 100
                 else
                 {
                     Val_No_Save = Val_No_Save -100;
                 }
             }
-            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en mémoire 
+            //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en mÃ©moire 
             else if (Pec12IsESC == 1)
             {
                 SELECTION_MENU = MENU_OFFSET;
@@ -453,30 +451,7 @@ void MENU_Execute(S_ParamGen *pParam)
         }        
    
     }
-   
-=======
-      
-    
-    
-    
-    
-    /*static uint16_t EchNb = 0;
-    const uint16_t step = 65535 / MAX_ECH;
-    SPI_WriteToDac(0,step*EchNb);
-    EchNb ++;
-<<<<<<< HEAD
-    EchNb = EchNb % MAX_ECH;*/
-     
-    
-    //UTILISANT LES FONCTIONS DU PEC12 + BTN -> REPONDS AUX REGLAGES DE L'UTILISATEUR
-    //ET APPELLE LES FCT DE MàJ DU GENERATEUR
-    
-    //FCT PREVUE POUR UN APPEL CYCLIQUE -> BASEE SUR UNE MACHINE D'ETAT + NON-BLOQUANTE
-    
-    
-    
-    //EchNb = EchNb % MAX_ECH;
->>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
+
 }
 
 
