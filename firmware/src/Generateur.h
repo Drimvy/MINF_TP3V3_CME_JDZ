@@ -15,7 +15,6 @@
 
 typedef struct {
             uint16_t Nb_Tic;
-            uint16_t Nb_Tic2;
             uint16_t Min;             // Amplitude min
             uint16_t Max;             // Amplitude max  
             

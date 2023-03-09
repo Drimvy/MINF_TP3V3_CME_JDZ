@@ -12,9 +12,13 @@
 #include <stdint.h>
 #include "DefMenuGen.h"
 
+typedef enum  { MENU_FORME, MENU_FORME_VALEUR, MENU_FREQU, MENU_FREQU_VALEUR, MENU_AMPLI, MENU_AMPLI_VALEUR, MENU_OFFSET, MENU_OFFSET_VALEUR} E_MENU;
 
 void MENU_Initialize(S_ParamGen *pParam);
 
+void Menu_Sauvgarde();
+
+void Clear_LCD();
 
 void MENU_Execute(S_ParamGen *pParam);
 

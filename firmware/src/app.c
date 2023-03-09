@@ -84,6 +84,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 APP_DATA appData;
 S_ParamGen LocalParamGen;
+//flag permettant d'initialiser l'ecran
+uint8_t flag_tour = 1 ;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -155,10 +157,7 @@ void APP_Tasks ( void )
             
 
             // Initialisation PEC12
-            //Pec12Init();
-
-            // Initialisation du menu
-            //MENU_Initialize(&LocalParamGen);
+            //Pec12Init();      
 
             // Initialisation du generateur
             GENSIG_Initialize(&LocalParamGen);
@@ -189,8 +188,16 @@ void APP_Tasks ( void )
         }
        case APP_STATE_SERVICE_TASKS:
        {
-            LED2_W = !LED2_R;;
-
+            LED2_W = !LED2_R;
+            if (flag_tour == 1)
+            {
+                //Initaliser 
+                // Initialisation du menu
+                MENU_Initialize(&LocalParamGen);
+                //remettre le flag à 0 car s'initailise une seul fois
+                flag_tour = 0;
+            }
+            
             // Execution du menu
             MENU_Execute(&LocalParamGen);
             appData.state = APP_STATE_WAIT;
