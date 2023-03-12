@@ -83,7 +83,7 @@ void __ISR(_TIMER_1_VECTOR, ipl3AUTO) IntHandlerDrvTmrInstance0(void)
     
     if(ATTENDRE == NCYCLE )
     {
-        ScanPec12(PEC12_A, PEC12_B, PEC12_PB);
+        ScanPec12(PEC12_A, PEC12_B, PEC12_PB );
         APP_UpdateState(APP_STATE_SERVICE_TASKS);
         NCYCLE = 9;
         ATTENDRE = 0;

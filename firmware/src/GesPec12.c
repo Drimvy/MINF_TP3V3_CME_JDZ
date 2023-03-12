@@ -71,7 +71,7 @@ S_Pec12_Descriptor Pec12;
 //     __________                       __________________
 // A:            |_____________________|        
 
-<<<<<<< HEAD
+
 void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 {   
     //Traitement ainti-rebond sur A, B et PB
@@ -112,85 +112,6 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 
         Pec12.PressDuration++; //Incrément de 1
         Pec12ClearInactivity();
-=======
-/*void ScanPec12 (bool ValA, bool ValB, bool ValPB)
-{
-     //déclaration des variables;
-	//Val encodeur;
-	uint8_t ValAB;
-	uint8_t OLD_ValAB = 0;
-	//Val bouton;
-	uint8_t OLD_ValPB;
-	//position encodeur;
-	
-	//Compteur ok esc;
-	static uint8_t Compt_BT;
-	//compteur AFK;
-	static uint8_t Compt_AFK;
-   // Traitement antirebond sur A, B et PB
-   DoDebounce (&DescrA, ValA);
-   DoDebounce (&DescrB, ValB);
-   DoDebounce (&DescrPB, ValPB);
-   
-   //entrer la valeur de A sur byte MSB de ValAB
-   ValAB  = DescrA.bits.KeyReleased;
-   ValAB = ValAB << 4;
-   //entrer la valeur de B sur byte LSB de ValAB
-   ValAB = ValAB | DescrB.bits.KeyReleased;
-   DescrB.bits.KeyPrevInputValue
-   // Détection incrément / décrément
-   Compt_AFK ++ ;
-   // Traitement du PushButton
-   //si lors de la valeur de valAB est différant que la précedente
-   if (ValAB != OLD_ValAB)
-    //    if ((DescrA.bits.KeyPressed == 0) && (DescrA.bits.KeyPrevInputValue == 1) && (DescrB.bits.KeyPressed == 1) ||
-    //            (DescrA.bits.KeyPressed == 1) && (DescrA.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyPressed == 0))
-   {
-        switch (ValAB)
-        {
-            //lorsque les deux signaux sont à 0
-            case 0x00: 
-				//ne rien faire;
-			break;
-            
-            //lorsque le B est a 1
-            case 0x01:
-				//sens anti horaire;
-                if (OLD_ValAB==0x00)
-                {
-                    Pec12.Inc = Pec12IsPlus ;
-                    Compt_AFK = 0;//Pec12ClearInactivity 
-                }
-                else
-                {
-                    //ne rien faire;
-                }
-            break;
-            
-            //lorsque le A est a 1
-            case 0x10:
-                    //sens horaire;
-                if (OLD_ValAB==0x00)
-                {
-                    Pec12.Dec = Pec12IsMinus ();
-                    Compt_AFK = 0;//Pec12ClearInactivity 
-                }
-                else
-                {
-                    //ne rien faire;
-                }
-            break;
-            
-            //lorsque les deux signaux sont à 1
-            case 0x11:
-                    //ne rien faire;
-            break;
-
-            default:
-                    //erreur;
-                break; 
-		}  
->>>>>>> b2aaeca84b70b3c66fda3078a17189699756e079
     }
     else
     { 

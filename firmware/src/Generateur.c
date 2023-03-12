@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // Canevas manipulation GenSig avec menu
 // C. HUBER  09/02/2015
 // Fichier Generateur.C
@@ -193,8 +193,8 @@ void  GENSIG_Execute(void)
   
    
 }
-=======
-// Canevas manipulation GenSig avec menu
+
+/*// Canevas manipulation GenSig avec menu
 // C. HUBER  09/02/2015
 // Fichier Generateur.C
 // Gestion  du générateur
@@ -387,5 +387,5 @@ void  GENSIG_Execute(void)
    EchNb = EchNb % MAX_ECH;
   
    
-}
->>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
+}*/
+

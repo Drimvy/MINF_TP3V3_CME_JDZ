@@ -187,7 +187,7 @@ void APP_Tasks ( void )
         break;
         }
        case APP_STATE_SERVICE_TASKS:
-<<<<<<< HEAD
+
        {
             LED2_W = !LED2_R;
             if (flag_tour == 1)
@@ -198,12 +198,9 @@ void APP_Tasks ( void )
                 //remettre le flag à 0 car s'initailise une seul fois
                 flag_tour = 0;
             }
-            
-=======
-       {         
-            LED2_W = !LED2_R;;
+           LED2_W = !LED2_R;;
 
->>>>>>> f819557ec5304b809a65b659160df16c2cbe8aa7
+
             // Execution du menu
             MENU_Execute(&LocalParamGen);
             appData.state = APP_STATE_WAIT;
@@ -219,6 +216,7 @@ void APP_Tasks ( void )
             break;
         }
     }
+    
 }
 
 void APP_UpdateState(APP_STATES newState)
