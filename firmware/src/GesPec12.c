@@ -29,13 +29,15 @@
 #include "Mc32Debounce.h"
 #include "Mc32DriverLcd.h"
 #include <stdint.h>
+#include "bsp.h"
 
-#define AFK_TIME 5000 //Durée d'inactivité avant d'étaindre le rétro-éclairage
+#define AFK_TIME 500 //Durée d'inactivité avant d'étaindre le rétro-éclairage
 
 // Descripteur des sinaux
 S_SwitchDescriptor DescrA;
 S_SwitchDescriptor DescrB;
 S_SwitchDescriptor DescrPB;
+
 
 // Structure pour les traitement du Pec12
 S_Pec12_Descriptor Pec12;
@@ -60,18 +62,16 @@ S_Pec12_Descriptor Pec12;
 // D'ou traitement uniquement au flanc descendand de B
 
 // Dans le sens horaire CW:
-//     __________                      ________________
-// B:            |____________________|
-//     ___________________                       _________
-// A:                     |_____________________|                    
-
-// Dans le sens anti-horaire CCW:
-//     ____________________                      _________
-// B:                      |____________________|
 //     __________                       __________________
 // A:            |_____________________|        
+//     ____________________                      _________
+// B:                      |____________________|
+// Dans le sens anti-horaire CCW:
+//     ___________________                       _________
+// A:                     |_____________________|                    
+//     __________                      ________________
+// B:            |____________________|
 
-<<<<<<< HEAD
 void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 {   
     //Traitement ainti-rebond sur A, B et PB
@@ -79,6 +79,8 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     DoDebounce (&DescrB, ValB);
     DoDebounce (&DescrPB, ValPB);
     
+    Pec12.Inc = 0;
+    Pec12.Dec = 0;
     
             //=================================//
             // Détection Incrément / Décrément //
@@ -88,18 +90,19 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     if(DebounceIsPressed(&DescrB)){
         // Quittance de l'événement
         DebounceClearPressed(&DescrB);
-
+        
         if ( DebounceGetInput (&DescrA) == 0)
         {
            // Si A = 0 : situation CW = incrément
            Pec12.Inc = 1;
-           Pec12ClearInactivity();
         } 
          else
         {
             Pec12.Dec = 1;
-            Pec12ClearInactivity();
         }
+        
+        Pec12.Inc = 0;
+        Pec12.Dec = 0;
     }
     
     
@@ -111,86 +114,6 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     if(DebounceIsPressed(&DescrPB)){
 
         Pec12.PressDuration++; //Incrément de 1
-        Pec12ClearInactivity();
-=======
-/*void ScanPec12 (bool ValA, bool ValB, bool ValPB)
-{
-     //déclaration des variables;
-	//Val encodeur;
-	uint8_t ValAB;
-	uint8_t OLD_ValAB = 0;
-	//Val bouton;
-	uint8_t OLD_ValPB;
-	//position encodeur;
-	
-	//Compteur ok esc;
-	static uint8_t Compt_BT;
-	//compteur AFK;
-	static uint8_t Compt_AFK;
-   // Traitement antirebond sur A, B et PB
-   DoDebounce (&DescrA, ValA);
-   DoDebounce (&DescrB, ValB);
-   DoDebounce (&DescrPB, ValPB);
-   
-   //entrer la valeur de A sur byte MSB de ValAB
-   ValAB  = DescrA.bits.KeyReleased;
-   ValAB = ValAB << 4;
-   //entrer la valeur de B sur byte LSB de ValAB
-   ValAB = ValAB | DescrB.bits.KeyReleased;
-   DescrB.bits.KeyPrevInputValue
-   // Détection incrément / décrément
-   Compt_AFK ++ ;
-   // Traitement du PushButton
-   //si lors de la valeur de valAB est différant que la précedente
-   if (ValAB != OLD_ValAB)
-    //    if ((DescrA.bits.KeyPressed == 0) && (DescrA.bits.KeyPrevInputValue == 1) && (DescrB.bits.KeyPressed == 1) ||
-    //            (DescrA.bits.KeyPressed == 1) && (DescrA.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyPressed == 0))
-   {
-        switch (ValAB)
-        {
-            //lorsque les deux signaux sont à 0
-            case 0x00: 
-				//ne rien faire;
-			break;
-            
-            //lorsque le B est a 1
-            case 0x01:
-				//sens anti horaire;
-                if (OLD_ValAB==0x00)
-                {
-                    Pec12.Inc = Pec12IsPlus ;
-                    Compt_AFK = 0;//Pec12ClearInactivity 
-                }
-                else
-                {
-                    //ne rien faire;
-                }
-            break;
-            
-            //lorsque le A est a 1
-            case 0x10:
-                    //sens horaire;
-                if (OLD_ValAB==0x00)
-                {
-                    Pec12.Dec = Pec12IsMinus ();
-                    Compt_AFK = 0;//Pec12ClearInactivity 
-                }
-                else
-                {
-                    //ne rien faire;
-                }
-            break;
-            
-            //lorsque les deux signaux sont à 1
-            case 0x11:
-                    //ne rien faire;
-            break;
-
-            default:
-                    //erreur;
-                break; 
-		}  
->>>>>>> b2aaeca84b70b3c66fda3078a17189699756e079
     }
     else
     { 
@@ -201,8 +124,6 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     if(DebounceIsReleased(&DescrPB))
     {
         DebounceClearReleased(&DescrPB); // Quittance de l'événement
-        
-        Pec12ClearInactivity();   
     }
     
     
@@ -211,35 +132,33 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
             // Gestion inactivité //
             //====================//
     
-    if(Pec12.InactivityDuration >= AFK_TIME)
-    {
-        lcd_bl_off(); //Eclairage LCD éteint
-    }
-    else
-    {
-        Pec12.InactivityDuration += 1;
-    }
     
-    
-    
-    /*
+
+    //Incrément ou reset du compteur AFK
     if((Pec12.Inc || Pec12.Dec || Pec12.OK || Pec12.ESC) == 0)
     {
-        Pec12.NoActivity = 1;
-        Pec12.InactivityDuration++;
-        
-        if(Pec12.InactivityDuration >= 5000)
+        //Test durée d'inactivité > 5sec
+        if(Pec12.InactivityDuration >= AFK_TIME)
         {
-            lcd_bl_off(); //Eclairage LCD éteint
-            Pec12.InactivityDuration = 0;
+            //Pec12.InactivityDuration = 0;
+            Pec12.NoActivity = 1;
+        }
+        else
+        {
+            Pec12.InactivityDuration += 1;
         }
     }
+    
     else
     {
-        lcd_bl_on();
-        Pec12ClearInactivity(); 
-    }*/
-
+        Pec12ClearInactivity();
+    }
+    
+    if(S_OK == 0)
+    {
+        S9_OK();
+    }
+    
 } //end of ScanPec12
 
 
@@ -277,6 +196,12 @@ bool Pec12NoActivity    (void) {
     Pec12.NoActivity  = 1;
    return (Pec12.NoActivity);
 }
+
+bool S9_OK (void){
+    S9_Flag = 1;
+    return(S9_Flag);
+}
+
 
 //  Fonctions pour quittance des indications
 //       Pec12ClearPlus    annule indication d'incrément
