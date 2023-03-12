@@ -44,7 +44,8 @@ typedef struct {
             uint16_t InactivityDuration;   // Pour durée inactivité
 } S_Pec12_Descriptor;
 
-
+//Flag de détection d'appui sur S9
+uint8_t S9_Flag;
 
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -66,17 +67,17 @@ typedef struct {
 // D'ou traitement uniquement au flanc descendand de B
 
 // Dans le sens horaire CW:
-//     ___________________                       _________
-// A:                     |_____________________|                    
-//     __________                      ________________
-// B:            |____________________|
-
-// Dans le sens anti-horaire CCW:
 //     __________                       __________________
 // A:            |_____________________|        
 //     ____________________                      _________
 // B:                      |____________________|
 
+// Dans le sens anti-horaire CCW:
+
+//     ___________________                       _________
+// A:                     |_____________________|                    
+//     __________                      ________________
+// B:            |____________________|
 void ScanPec12 (bool ValA, bool ValB, bool ValPB);
 
 void Pec12Init (void);
@@ -91,6 +92,10 @@ bool Pec12IsOK    (void);
 bool Pec12IsESC    (void);
 //       Pec12NoActivity   true indique abscence d'activité sur PEC12
 bool Pec12NoActivity    (void);
+//       S9_OK             true indique une pression sur le switch S9
+bool S9_OK    (void);
+
+
 
 //  Fonctions pour quittance des indications
 //       Pec12ClearPlus    annule indication d'incrément
