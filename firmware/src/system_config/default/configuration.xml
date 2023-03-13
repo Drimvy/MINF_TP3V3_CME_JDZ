@@ -239,13 +239,12 @@
         <Name dnOrder="0">drv_tmr_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/tmr/src</Path>
         <Checksum dnOrder="2">C0C1D71DC438314C4B1F72E1C7962F4E</Checksum>
-        <ProjectFileChecksum dnOrder="3">889BAC15B8DF129DC3CE604867DEBE07</ProjectFileChecksum>
       </Template>
       <Template dnOrder="16">
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">2ACC3346B273EDB1139988908A5ADE15</Checksum>
-        <ProjectFileChecksum dnOrder="3">237BB76945799CEA6FFACC09C5011BDB</ProjectFileChecksum>
+        <ProjectFileChecksum dnOrder="3">78B892F8303171C309AE222B46A05A42</ProjectFileChecksum>
       </Template>
       <Template dnOrder="17">
         <Name dnOrder="0">sys_clk_pic32mx.c</Name>
@@ -255,11 +254,11 @@
     </Templates>
     <CompilerItems dnOrder="2">
       <C32 dnOrder="0">
-        <Include dnOrder="0" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP3_CME_JDZ\firmware\src"/>
-        <Include dnOrder="1" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP3_CME_JDZ\firmware\src\system_config\default"/>
-        <Include dnOrder="2" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP3_CME_JDZ\firmware\src\default"/>
+        <Include dnOrder="0" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP3V3_CME_JDZ\firmware\src"/>
+        <Include dnOrder="1" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP3V3_CME_JDZ\firmware\src\system_config\default"/>
+        <Include dnOrder="2" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP3V3_CME_JDZ\firmware\src\default"/>
         <Include dnOrder="3" value="C:\microchip\harmony\v2_06\framework"/>
-        <Include dnOrder="4" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP3_CME_JDZ\firmware\src\system_config\default\framework"/>
+        <Include dnOrder="4" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP3V3_CME_JDZ\firmware\src\system_config\default\framework"/>
         <Include dnOrder="5" value="../../../../../../bsp/pic32mx_skes"/>
       </C32>
     </CompilerItems>

@@ -41,6 +41,7 @@ S_SwitchDescriptor DescrPB;
 
 // Structure pour les traitement du Pec12
 S_Pec12_Descriptor Pec12;
+S_S9_Descriptor S9;
 
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -72,10 +73,10 @@ S_Pec12_Descriptor Pec12;
 //     __________                      ________________
 // B:            |____________________|
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/JULIEN
+
+
+
 void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 {   
     //Traitement ainti-rebond sur A, B et PB
@@ -86,12 +87,13 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     Pec12.Inc = 0;
     Pec12.Dec = 0;
     
-            //=================================//
-            // Détection Incrément / Décrément //
-            //=================================//
+       //=================================//
+      // Détection Incrément / Décrément //
+     //=================================//
     
     //Détection flanc descendant sur B
-    if(DebounceIsPressed(&DescrB)){
+    if(DebounceIsPressed(&DescrB))
+    {
         // Quittance de l'événement
         DebounceClearPressed(&DescrB);
         
@@ -104,24 +106,38 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
         {
             Pec12.Dec = 1;
         }
-        
-        Pec12.Inc = 0;
-        Pec12.Dec = 0;
+    }
+    
+       //===========================//
+      // Traitement du Push Button //
+     //===========================//
+    
+    if(DescrPB.bits.KeyValue == 1)
+    {
+        Pec12.OK = 0;   
+        Pec12.ESC = 0;
+    }
+    else if(DescrPB.bits.KeyValue == 0)
+    {
+        Pec12.PressDuration ++;
+    }
+    if ((Pec12.PressDuration > 50) && (DescrPB.bits.KeyValue == 0))
+    {
+        Pec12.ESC = 1;
+        Pec12.PressDuration = 0;
+    }
+    else if ((Pec12.PressDuration < 50)&&(Pec12.PressDuration > 0) && (DescrPB.bits.KeyValue == 0))
+    {
+        Pec12.OK = 1;
+        Pec12.PressDuration = 0;
     }
     
     
-    
-            //===========================//
-            // Traitement du Push Button //
-            //===========================//
-    
-    if(DebounceIsPressed(&DescrPB)){
-
+    /*if(DebounceIsPressed(&DescrPB))
+    {
         Pec12.PressDuration++; //Incrément de 1
-<<<<<<< HEAD
+
         Pec12ClearInactivity();
-=======
->>>>>>> origin/JULIEN
     }
     else
     { 
@@ -132,7 +148,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     if(DebounceIsReleased(&DescrPB))
     {
         DebounceClearReleased(&DescrPB); // Quittance de l'événement
-    }
+    }*/
     
     
     
@@ -164,7 +180,11 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     
     if(S_OK == 0)
     {
-        S9_OK();
+        S9.OK = 1;
+    }
+    else
+    {
+        S9.OK = 0;
     }
     
 } //end of ScanPec12

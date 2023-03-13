@@ -19,6 +19,8 @@ void MENU_Initialize(S_ParamGen *pParam);
 
 void Menu_Sauvgarde();
 
+void Menu_interface(S_ParamGen *pParam);
+
 void Clear_LCD();
 
 void MENU_Execute(S_ParamGen *pParam);

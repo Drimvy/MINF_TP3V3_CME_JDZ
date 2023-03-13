@@ -44,6 +44,11 @@ typedef struct {
             uint16_t InactivityDuration;   // Pour durée inactivité
 } S_Pec12_Descriptor;
 
+typedef struct {
+
+            uint8_t OK  : 1;              // événement action OK
+
+} S_S9_Descriptor;
 //Flag de détection d'appui sur S9
 uint8_t S9_Flag;
 

@@ -72,7 +72,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
  
-
+//timer 1 = 1ms
 void __ISR(_TIMER_1_VECTOR, ipl3AUTO) IntHandlerDrvTmrInstance0(void)
 {
     int static ATTENDRE = 0;
@@ -99,6 +99,7 @@ void __ISR(_TIMER_2_VECTOR, ipl0AUTO) IntHandlerDrvTmrInstance1(void)
 {
     PLIB_INT_SourceFlagClear(INT_ID_0,INT_SOURCE_TIMER_2);
 }
+//timer 3 = 100us
 void __ISR(_TIMER_3_VECTOR, ipl7AUTO) IntHandlerDrvTmrInstance2(void)
 {
     LED0_W = 1;

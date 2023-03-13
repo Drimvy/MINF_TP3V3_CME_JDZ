@@ -3,26 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/MenuGen.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/DefMenuGen.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Generateur.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/MenuGen.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/Mc32DriverLcd.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/system_config/default/system_interrupt.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/MINF_TP3V2_CME_JDZ.X/nbproject/Makefile-default.mk</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Mc32SpiUtil.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/GesPec12.c</file>
             <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/bsp.h</file>
             <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/Mc32DriverLcd.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/app.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/bsp/pic32mx_skes/Mc32Delays.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/system_config/default/system_tasks.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Generateur.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/GesPec12.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/app.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/MINF_TP3V2_CME_JDZ.X/nbproject/Makefile-impl.mk</file>
-=======
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/GesPec12.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3-V3_CME_JDZ/firmware/src/app.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/TP3_CME_JDZ/firmware/src/GesPec12.h</file>
->>>>>>> origin/JULIEN
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/GesPec12.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/main.c</file>
         </group>
     </open-files>
 </project-private>

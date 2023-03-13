@@ -203,6 +203,7 @@ void APP_Tasks ( void )
 
             // Execution du menu
             MENU_Execute(&LocalParamGen);
+            
             appData.state = APP_STATE_WAIT;
             
          break;
