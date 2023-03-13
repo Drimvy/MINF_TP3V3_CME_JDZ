@@ -84,9 +84,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     DoDebounce (&DescrB, ValB);
     DoDebounce (&DescrPB, ValPB);
     
-    Pec12.Inc = 0;
-    Pec12.Dec = 0;
-    
+
        //=================================//
       // Détection Incrément / Décrément //
      //=================================//
