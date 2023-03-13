@@ -1,8 +1,8 @@
 // Tp3  manipulation MenuGen avec PEC12
 // C. HUBER  10/02/2015 pour SLO2 2014-2015
 // Fichier MenuGen.c
-// Gestion du menu  du gÃ©nÃ©rateur
-// Traitement cyclique Ã  10 ms
+// Gestion du menu  du gÃƒÂ©nÃƒÂ©rateur
+// Traitement cyclique ÃƒÂ  10 ms
 
 
 
@@ -55,9 +55,9 @@ void MENU_Initialize(S_ParamGen *pParam)
     lcd_gotoxy(2,4);    
     printf_lcd("Offset[mV]");  
     lcd_gotoxy(13,4);
-    printf_lcd("%.3d", pParam->Offset);
+    printf_lcd("%.4d", (int)pParam->Offset);
    
-    //initaliser premiemiere parametre a  pointer dans le menu
+    //initaliser premiemiere parametre aÂ  pointer dans le menu
     SELECTION_MENU = MENU_FORME;
     
 }
@@ -113,7 +113,7 @@ void Menu_interface(S_ParamGen *pParam)
     lcd_gotoxy(2,4);    
     printf_lcd("Offset[mV]");  
     lcd_gotoxy(13,4);
-    printf_lcd("%.3d", pParam->Offset);
+    printf_lcd("%.4d", pParam->Offset);
 }
 
 // Execution du menu, appel cyclique depuis l'application
@@ -125,7 +125,7 @@ void MENU_Execute(S_ParamGen *pParam)
     //enregister dans la flash
     if (S9.OK == 1)
     {
-        //si le meintiens du bouton S9 > à 2 sec
+        //si le meintiens du bouton S9 > Ã  2 sec
         Menu_Sauvgarde();
         MAJ_LCD = 1;
         if (Timer_2Sec >= 199)
@@ -163,7 +163,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 1);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_FREQU;
                 }
                 //decrementer choix du menu
@@ -172,7 +172,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 1);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_OFFSET;
                 }
                 //Valider le choix
@@ -193,41 +193,41 @@ void MENU_Execute(S_ParamGen *pParam)
             {
                 lcd_gotoxy(1,1);
                 printf_lcd("?");
-                Forme_No_Save = pParam->Forme;
+                Val_No_Save = pParam->Forme;
                 //incrementer la forme
                 if (Pec12.Inc == 1)
                 {
-                    //test si egal a la Singnal carree
-                    if(Forme_No_Save == SignalCarre )
+                    //test si egal aÂ la Singnal carree
+                    if(Val_No_Save == 4)
                     {
-                        Forme_No_Save = SignalSinus;
+                        Val_No_Save = 1;
                         lcd_gotoxy(13,1);
-                        printf_lcd("%d", pParam->Forme);
+                        printf_lcd("%d", Val_No_Save);
                     }
                     //sinon incrementer pour obtenir la nouvelle forme
                     else
                     {
                         Forme_No_Save = Forme_No_Save + 1;
                         lcd_gotoxy(13,1);
-                        printf_lcd("%d", pParam->Forme);
+                        printf_lcd("%d", Val_No_Save);
                     } 
                 }
                 //decrementer la frome
                 else if (Pec12.Dec == 1)
                 {
                     //test si egal Signal Sinus
-                    if(Forme_No_Save == SignalSinus )
+                    if(Val_No_Save == 1 )
                     {
-                        Forme_No_Save = SignalCarre;
+                        Val_No_Save = 4;
                         lcd_gotoxy(13,1);
-                        printf_lcd("%d", pParam->Forme);
+                        printf_lcd("%d", Val_No_Save);
                     }
                     //sinon decrementer pour obtenir la nouvelle forme
                     else
                     {
-                        Forme_No_Save = Forme_No_Save -1;
+                        Val_No_Save = Val_No_Save - 1;
                         lcd_gotoxy(13,1);
-                        printf_lcd("%d", pParam->Forme);
+                        printf_lcd("%d", Val_No_Save);
                     }
                 }
                 //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne forme en memoire
@@ -270,7 +270,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 2);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_AMPLI;
                 }
                 //decrementer choix du menu
@@ -279,7 +279,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 2);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_FORME;
                 }
                 //Valider le choix
@@ -300,9 +300,9 @@ void MENU_Execute(S_ParamGen *pParam)
                 lcd_gotoxy(1,2);
                 printf_lcd("?");
                 //recuperer la valeur de la frequence, l'enregister sur la variable
-                Val_No_Save = pParam->Frequence;
+                Val_No_Save = Val_No_Save;
 
-                //incrementer la valeur de la frÃ©quence
+                //incrementer la valeur de la frÃƒÂ©quence
                 if (Pec12.Inc == 1)
                 {
                     //test si superieur ou egal a la frequence max
@@ -315,13 +315,13 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save +20;
                         lcd_gotoxy(13,2);
-                        printf_lcd("%.3d", pParam->Frequence);
+                        printf_lcd("%.3d", Val_No_Save);
                     } 
                 }
                 //decrementer la valeur de la frequence
                 else if (Pec12.Dec == 1)
                 {
-                    //test si inferieur ou égal a la frequence min
+                    //test si inferieur ou Ã©gal aÂ la frequence min
                     if(Val_No_Save <= 20 )
                     {
                         Val_No_Save = 20;
@@ -331,7 +331,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save -20;
                         lcd_gotoxy(13,2);
-                        printf_lcd("%.3d", pParam->Frequence);
+                        printf_lcd("%.3d", Val_No_Save);
                     }
                 }
                 //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en memoire 
@@ -372,7 +372,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 3);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_OFFSET;
                 }
                 //decrementer choix du menu
@@ -381,7 +381,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 3);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_FREQU;
                 }
                 //Valider le choix
@@ -407,7 +407,7 @@ void MENU_Execute(S_ParamGen *pParam)
                 //incrementer la valeur de l'amplitude 
                 if (Pec12.Inc == 1)
                 {
-                    //test si superieur ou egal a  l'amplitude max
+                    //test si superieur ou egal aÂ  l'amplitude max
                     if(Val_No_Save >= 10000 )
                     {
                         Val_No_Save = 2000;
@@ -417,13 +417,13 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save +100;
                         lcd_gotoxy(13,3);
-                        printf_lcd("%.4d", pParam->Amplitude);
+                        printf_lcd("%.4d", Val_No_Save);
                     } 
                 }
                 //decrementer la valeur de l'amplitude 
                 else if (Pec12.Dec == 1)
                 {
-                    //test si inferieur ou egal e  l'amplitude min
+                    //test si inferieur ou egal eÂ  l'amplitude min
                     if(Val_No_Save <= 0 )
                     {
                         Val_No_Save = 0;
@@ -433,7 +433,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save -100;
                         lcd_gotoxy(13,3);
-                        printf_lcd("%.4d", pParam->Amplitude);
+                        printf_lcd("%.4d", Val_No_Save);
                     }
                 }
                 //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en memoire 
@@ -476,7 +476,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 4);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_FORME;
                 }
                 //decrementer choix du menu
@@ -485,7 +485,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     //effacer "*"
                     lcd_gotoxy( 1, 4);
                     printf_lcd(" ");
-                    //modifier la sélection du menu
+                    //modifier la sÃ©lection du menu
                     SELECTION_MENU = MENU_AMPLI;
                 }
                 //Valider le choix
@@ -521,13 +521,13 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save +100;
                         lcd_gotoxy(13,4);
-                        printf_lcd("%.3d", pParam->Offset);
+                        printf_lcd("%.3d", abs(Val_No_Save));
                     } 
                 }
                 //decrementer la valeur de l'offset
                 else if (Pec12.Dec == 1)
                 {
-                    //test si inferieur ou egal a  l'offset min
+                    //test si inferieur ou egal aÂ  l'offset min
                     if(Val_No_Save <= -5000 )
                     {
                         Val_No_Save = -5000;
@@ -537,7 +537,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save -100;
                         lcd_gotoxy(13,4);
-                        printf_lcd("%.3d", pParam->Offset);
+                        printf_lcd("%.3d", abs(Val_No_Save));
                     }
                 }
                 //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en memoire 
