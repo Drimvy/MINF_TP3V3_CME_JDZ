@@ -521,7 +521,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save +100;
                         lcd_gotoxy(13,4);
-                        printf_lcd("%.3d", abs(Val_No_Save));
+                        printf_lcd("%.4d", abs(Val_No_Save));
                     } 
                 }
                 //decrementer la valeur de l'offset
@@ -537,7 +537,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
                         Val_No_Save = Val_No_Save -100;
                         lcd_gotoxy(13,4);
-                        printf_lcd("%.3d", abs(Val_No_Save));
+                        printf_lcd("%.4d", abs(Val_No_Save));
                     }
                 }
                 //si on appuye sur esc, retourne sur affichage principal et garde l'ancienne val en memoire 
