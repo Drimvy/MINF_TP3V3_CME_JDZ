@@ -56,7 +56,7 @@ build/default/production/_ext/1360937237/Mc32gestSPiDac.o: \
  ../src/system_config/default/system_definitions.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+ ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -305,7 +305,7 @@ build/default/production/_ext/1360937237/Mc32gestSPiDac.o: \
 
 ../../../../../../framework/system/common/sys_module.h:
 
-../src/system_config/default/framework/system/devcon/sys_devcon.h:
+../../../../../../framework/system/devcon/sys_devcon.h:
 
 ../../../../../../framework/system/system.h:
 

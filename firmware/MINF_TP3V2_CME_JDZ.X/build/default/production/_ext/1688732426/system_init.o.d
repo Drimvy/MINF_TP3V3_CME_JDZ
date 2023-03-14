@@ -56,7 +56,7 @@ build/default/production/_ext/1688732426/system_init.o: \
  ../src/system_config/default/system_definitions.h \
  ../../../../../../framework/system/common/sys_common.h \
  ../../../../../../framework/system/common/sys_module.h \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+ ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../src/system_config/default/system_config.h \
@@ -259,7 +259,7 @@ build/default/production/_ext/1688732426/system_init.o: \
 
 ../../../../../../framework/system/common/sys_module.h:
 
-../src/system_config/default/framework/system/devcon/sys_devcon.h:
+../../../../../../framework/system/devcon/sys_devcon.h:
 
 ../../../../../../framework/system/system.h:
 

@@ -20,14 +20,15 @@
 // T.P. 2016 100 echantillons
 #define MAX_ECH 100
 #define VAL_TIC_MAX 32768
-
+//déclaration de....
+S_Amplitude Ampli;
 int tb_Amplitude[MAX_ECH];
 
 // Initialisation du  générateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
 {           
     pParam->Amplitude = 10000;
-    pParam->Forme = SignalDentDeScie;
+    pParam->Forme = 2;
     pParam->Frequence = 100;
     pParam->Offset = 0;   
 }
@@ -38,26 +39,27 @@ void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
 {
     
     //initaliser la variable
-    uint16_t static Periode = 0;
+    uint16_t Periode;
     
-    //---Calculer la période en fonction de la fréquence entrée comme paramètre----/   
-    //diviser par le nombre d'echantillon afin 
-    //d'obtenir la bonne fréquence pour la génération dusignal
-    Periode = (1/(pParam->Frequence));
-    // diviser la péride par MAX_ECH pour obtenir la période déchantillonnage
-    Periode = Periode/MAX_ECH;
-    //Convertir la periode en "timer compteur" pour le timer 3
-    Periode = (Periode * 8000 / 0.0001) - 1;
+//    //---Calculer la période en fonction de la fréquence entrée comme paramètre----/   
+//    //diviser par le nombre d'echantillon afin 
+//    //d'obtenir la bonne fréquence pour la génération dusignal
+//    Periode = (1/(pParam->Frequence));
+//    // diviser la péride par MAX_ECH pour obtenir la période déchantillonnage
+//    Periode = Periode/MAX_ECH;
+//    //Convertir la periode en "timer compteur" pour le timer 3
+//    Periode = ((Periode * 8000) / 0.0001) - 1;
     
+    Periode =  (SYS_CLK_FREQ / ( (uint32_t)MAX_ECH * pParam->Frequence)) - 1;
+            
+            
     //modifier la periode du timer 3
     PLIB_TMR_Period16BitSet(TMR_ID_3, Periode);
 }
 
 // Mise à jour du signal (forme, amplitude, offset)
 void  GENSIG_UpdateSignal(S_ParamGen *pParam)
-{
-    //déclaration de....
-    S_Amplitude Ampli;
+{ 
     //intialisation de la variable statique offset
     uint16_t Offset;
     
@@ -133,7 +135,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             for( i = 0; i < 100; i++)
             {
                 //calcul pour rénérer un dent de cie
-                tb_Amplitude[i] = (Step * i)+ Ampli.Min + Offset;
+                tb_Amplitude[i] = (Step * i)+ Ampli.Min  + Offset;
             }
 
         break;
@@ -147,7 +149,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             {
                 if(i < 50 )
                 {
-                    tb_Amplitude[i] = Ampli.Max +Offset ;
+                    tb_Amplitude[i] = Ampli.Max + VAL_TIC_MAX +Offset ;
                 }
                 else
                 {

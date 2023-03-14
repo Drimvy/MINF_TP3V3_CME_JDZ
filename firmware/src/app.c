@@ -84,6 +84,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 APP_DATA appData;
 S_ParamGen LocalParamGen;
+
 //flag permettant d'initialiser l'ecran
 uint8_t flag_tour = 1 ;
 
@@ -152,15 +153,6 @@ void APP_Tasks ( void )
             lcd_init();
             lcd_bl_on();
 
-            // Init SPI DAC
-            SPI_InitLTC2604();
-            
-
-            // Initialisation PEC12
-            //Pec12Init();      
-
-            // Initialisation du generateur
-            GENSIG_Initialize(&LocalParamGen);
             
             printf_lcd("Tp3 GenSig 22-23");
             // A adapter pour les 2 noms sur 2 lignes
@@ -168,14 +160,23 @@ void APP_Tasks ( void )
             printf_lcd("Caroline Mieville");
             lcd_gotoxy(1,3);
             printf_lcd("Julien Decrausaz");
+
+            // Init SPI DAC
+            SPI_InitLTC2604();  
+
+            // Initialisation du generateur
+            GENSIG_Initialize(&LocalParamGen);
+            //realiser le signal
+            GENSIG_UpdateSignal(&LocalParamGen);
+            //mettre à jour la période
+            GENSIG_UpdatePeriode(&LocalParamGen);
+            
+            //Init Pec12Init
+            Pec12Init();
             
             /* initialisation des timers */
-            // DRV_TMR0_Start();  
             DRV_TMR0_Start ();
-            // DRV_TMR1_Start();  
             DRV_TMR1_Start ();           
-            // DRV_TMR2_Start();  
-            DRV_TMR2_Start ();   
             
             
             appData.state = APP_STATE_WAIT;
@@ -192,19 +193,18 @@ void APP_Tasks ( void )
             LED2_W = !LED2_R;
             if (flag_tour == 1)
             {
-                //Initaliser 
                 // Initialisation du menu
                 MENU_Initialize(&LocalParamGen);
                 //remettre le flag à 0 car s'initailise une seul fois
                 flag_tour = 0;
             }
-           LED2_W = !LED2_R;;
-
 
             // Execution du menu
             MENU_Execute(&LocalParamGen);
+            // Mettre à 0 les valeurs des boutons
             
             appData.state = APP_STATE_WAIT;
+            LED2_W = !LED2_R;;
             
          break;
         }

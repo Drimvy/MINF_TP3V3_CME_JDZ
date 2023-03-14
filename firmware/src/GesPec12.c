@@ -31,7 +31,7 @@
 #include <stdint.h>
 #include "bsp.h"
 
-#define AFK_TIME 500 //Dur√©e d'inactivit√© avant d'√©taindre le r√©tro-√©clairage
+#define AFK_TIME 5000 //Dur√©e d'inactivit√© avant d'√©taindre le r√©tro-√©clairage
 
 // Descripteur des sinaux
 S_SwitchDescriptor DescrA;
@@ -74,7 +74,23 @@ S_S9_Descriptor S9;
 // B:            |____________________|
 
 
-
+void Pec12Init (void)
+{
+   // Initialisation des descripteurs de touches Pec12
+   DebounceInit(&DescrA);
+   DebounceInit(&DescrB);
+   DebounceInit(&DescrPB);
+   
+   // Init de la structure PEc12
+    Pec12.Inc = 0;             // ÈvÈnement incrÈment  
+    Pec12.Dec = 0;             // ÈvÈnement dÈcrÈment 
+    Pec12.OK = 0;              // ÈvÈnement action OK
+    Pec12.ESC = 0;             // ÈvÈnement action ESC
+    Pec12.NoActivity = 0;      // Indication d'activitÈ
+    Pec12.PressDuration = 0;   // Pour durÈe pression du P.B.
+    Pec12.InactivityDuration = 0; // DurÈe inactivitÈ
+  
+ } // Pec12Init
 
 
 void ScanPec12 (bool ValA, bool ValB, bool ValPB)
@@ -88,24 +104,27 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
        //=================================//
       // D√©tection Incr√©ment / D√©cr√©ment //
      //=================================//
-    //Detection flanc descendant sur B
-    if((DescrB.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyValue == 1) && (DescrA.bits.KeyValue == 1)) 
-    {
-        Pec12.Inc = 1;
-    }
-    else if((DescrB.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyValue == 1) && (DescrA.bits.KeyValue == 1)) 
-    {
-        Pec12.Dec = 1;
-    }
-    else
-    {
-        Pec12.Inc = 0;
-        Pec12.Dec = 0;
-    }    
+//    //Detection flanc descendant sur B
+//    if(((DescrB.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyValue == 1) && (DescrA.bits.KeyValue == 1)) //
+//        ||((DescrB.bits.KeyPrevInputValue == 1) && (DescrB.bits.KeyValue == 0) && (DescrA.bits.KeyValue == 0)))
+//            
+//    {
+//        Pec12.Inc = 1;
+//    }
+//    
+//    else if (((DescrB.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyValue == 1) && (DescrA.bits.KeyValue == 0)) //
+//        ||((DescrB.bits.KeyPrevInputValue == 1) && (DescrB.bits.KeyValue == 0) && (DescrA.bits.KeyValue == 1 )))
+//                
+//    {
+//        Pec12.Dec = 1;
+//    }
+       
     
-    /*//D√©tection flanc descendant sur B
+    //Detection flanc descendant sur B
     if(DebounceIsPressed(&DescrB))
     {
+        Pec12.InactivityDuration  = 0;
+        
         // Quittance de l'√©v√©nement
         DebounceClearPressed(&DescrB);
         
@@ -118,66 +137,84 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
         {
             Pec12.Dec = 1;
         }
-    }*/
+    }
     
        //===========================//
       // Traitement du Push Button //
      //===========================//
     
-    if(DescrPB.bits.KeyValue == 0)
-    {
-        Pec12.OK = 0;   
-        Pec12.ESC = 0;
-    }
-    else if(DescrPB.bits.KeyValue == 1)
-    {
-        Pec12.PressDuration ++;
-    }
-    if ((Pec12.PressDuration >= 50) && (DescrPB.bits.KeyValue == 0))
-    {
-        Pec12.ESC = 1;
-        Pec12.PressDuration = 0;
-    }
-    else if ((Pec12.PressDuration < 50)&&(Pec12.PressDuration > 0) && (DescrPB.bits.KeyValue == 0))
-    {
-        Pec12.OK = 1;
-        Pec12.PressDuration = 0;
-    }
+//    if(DescrPB.bits.KeyPrevInputValue == 1)
+//    {
+//        Pec12.OK = 0;   
+//        Pec12.ESC = 0;
+//    }
+//    else if(DescrPB.bits.KeyPrevInputValue == 0)
+//    {
+//        Pec12.PressDuration ++;
+//    }
+//    if ((Pec12.PressDuration >= 25) && (DescrPB.bits.KeyPrevInputValue == 1))
+//    {
+//        Pec12.ESC = 1;
+//        Pec12.PressDuration = 0;
+//    }
+//    else if ((Pec12.PressDuration < 25)&&(Pec12.PressDuration > 0) && (DescrPB.bits.KeyPrevInputValue == 1))
+//    {
+//        Pec12.OK = 1;
+//        Pec12.PressDuration = 0;
+//    }
     
     
-    /*if(DebounceIsPressed(&DescrPB))
+    if(DebounceIsPressed(&DescrPB)) //appui
     {
-        Pec12.PressDuration++; //Incr√©ment de 1
+        DebounceClearPressed(&DescrPB);
+        Pec12.PressDuration = 0;
+        Pec12.InactivityDuration  = 0;
+    } 
+    else if(DebounceGetInput(&DescrPB) == 0) //maintien appuyÈ
+    {
+        Pec12.PressDuration++;
+        Pec12.InactivityDuration  = 0;   
+    }
+    else if (DebounceIsReleased(&DescrPB))//relachement
+    {
+        DebounceClearReleased(&DescrPB);
+        if (Pec12.PressDuration < 500)
+            Pec12.OK = 1;   //appui bref
+        else
+            Pec12.ESC = 1;  //appui long
+        Pec12.InactivityDuration  = 0;    
+    };
 
-        Pec12ClearInactivity();
+        
+  
+    
+           //====================//
+          //  Gestion BoutonS9  //
+         //====================//
+    
+    if(S_OK == 0)
+    {
+        S9.OK = 1;
     }
     else
-    { 
-        Pec12.PressDuration = 0; //Remise √† 0
+    {
+        S9.OK = 0;
     }
     
-    
-    if(DebounceIsReleased(&DescrPB))
-    {
-        DebounceClearReleased(&DescrPB); // Quittance de l'√©v√©nement
-    }*/
-    
-    
-    
             //====================//
-            // Gestion inactivit√© //
+            // Gestion inactivite //
             //====================//
     
     
 
-    //Incr√©ment ou reset du compteur AFK
-    if((Pec12.Inc && Pec12.Dec && Pec12.OK && Pec12.ESC) == 0)
+    //Increment ou reset du compteur AFK
+    if((Pec12.Inc ==0) && (Pec12.Dec == 0) && (DescrPB.bits.KeyPrevInputValue == 1)&&(S9.OK == 0))
     {
         //Test dur√©e d'inactivit√© > 5sec
         if(Pec12.InactivityDuration >= AFK_TIME)
         {
             //Pec12.InactivityDuration = 0;
-            lcd_bl_off;
+            lcd_bl_off();
             Pec12.NoActivity = 1;
         }
         else
@@ -191,24 +228,10 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
         if (Pec12.NoActivity == 1)
         {
            Pec12ClearInactivity();
-           lcd_bl_on;  
+           lcd_bl_on();  
         }
         Pec12.InactivityDuration = 0;
-    }
-    
-              //====================//
-             //  Gestion BoutonS9  //
-            //====================//
-    
-    if(S_OK == 0)
-    {
-        S9.OK = 1;
-    }
-    else
-    {
-        S9.OK = 0;
-    }
-    
+    }    
 } //end of ScanPec12
 
 
@@ -219,31 +242,26 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 
 //       Pec12IsPlus       true indique un nouveau incr√©ment
 bool Pec12IsPlus    (void) {
-    Pec12.Inc = 1;
    return (Pec12.Inc);
 }
 
 //       Pec12IsMinus      true indique un nouveau d√©cr√©ment
 bool Pec12IsMinus    (void) {
-    Pec12.Dec  = 1;
    return (Pec12.Dec);
 }
 
 //       Pec12IsOK         true indique action OK
 bool Pec12IsOK    (void) {
-    Pec12.OK  = 1;
    return (Pec12.OK);
 }
 
 //       Pec12IsESC        true indique action ESC
 bool Pec12IsESC    (void) {
-    Pec12.ESC = 1;
    return (Pec12.ESC);
 }
 
 //       Pec12NoActivity   true indique abscence d'activit√© sur PEC12
 bool Pec12NoActivity    (void) {
-    Pec12.NoActivity  = 1;
    return (Pec12.NoActivity);
 }
 
