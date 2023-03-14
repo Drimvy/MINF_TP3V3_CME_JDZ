@@ -5,18 +5,14 @@
         <group>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/MenuGen.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/DefMenuGen.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/system_config/default/system_config.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Generateur.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/system_config/default/system_interrupt.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Mc32gestSPiDac.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Mc32SpiUtil.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Mc32Debounce.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/GesPec12.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Mc32Debounce.h</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/system_config/default/system_definitions.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Generateur.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/MenuGen.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/app.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Mc32gestSPiDac.c</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Generateur.h</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/system_config/default/system_tasks.c</file>
-            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/app.h</file>
+            <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/Mc32SpiUtil.c</file>
             <file>file:/C:/microchip/harmony/v2_06/apps/MINF/TP/MINF_TP3V3_CME_JDZ/firmware/src/main.c</file>
         </group>
     </open-files>

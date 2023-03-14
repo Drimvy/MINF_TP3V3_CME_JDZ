@@ -507,7 +507,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     lcd_ClearLine(3);
                     //afficher "*Ampl[mV]"
                     lcd_gotoxy(1,3);
-                    printf_lcd("*Ampli[mV]"); 
+                    printf_lcd("*Ampl[mV]"); 
                     //afficher valeur
                     lcd_gotoxy(13,3);
                     printf_lcd("%d", Val.Amplitude);
@@ -569,14 +569,14 @@ void MENU_Execute(S_ParamGen *pParam)
                     if (Pec12.Inc == 1)
                     {
                         //test si supperieur ou egal e l'offset max
-                        if(Val.Offset >= +5000 )
+                        if(Val.Offset >= 5000 )
                         {
-                            Val.Offset = abs(+5000);
+                            Val.Offset = (5000);
                         }
                         //sinon incrementer par pas de 100
                         else
                         {
-                            Val.Offset = abs(Val.Offset +100);
+                            Val.Offset = (Val.Offset +100);
                         } 
                     }
                     //decrementer la valeur de l'offset
@@ -585,12 +585,12 @@ void MENU_Execute(S_ParamGen *pParam)
                         //test si inferieur ou egal aÂ  l'offset min
                         if(Val.Offset <= -5000 )
                         {
-                            Val.Offset = abs(-5000);
+                            Val.Offset = (-5000);
                         }
                         //sinon decrementer par pas de 100
                         else
                         {
-                            Val.Offset = abs(Val.Offset -100);
+                            Val.Offset = (Val.Offset -100);
                         }
                     }
                     //GESTION AFFICHAGE//
@@ -601,7 +601,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     printf_lcd("?Offset[mV]");
                     //afficher valeur
                     lcd_gotoxy(13,4);
-                    printf_lcd("%d", abs(Val.Offset));
+                    printf_lcd("%d", Val.Offset);
                 }
                 if((Pec12.ESC == 1)||(Pec12.OK == 1))
                 {
@@ -610,7 +610,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     {
 
                         //sauvgarder la nouvelle valeur 
-                        pParam->Amplitude = Val.Offset;
+                        pParam->Offset = Val.Offset;
                     
                         //mettre à jour l'offset du signal
                         GENSIG_UpdateSignal(pParam);
@@ -629,7 +629,7 @@ void MENU_Execute(S_ParamGen *pParam)
                     printf_lcd("*Offset[mV]");
                     //afficher valeur
                     lcd_gotoxy(13,4);
-                    printf_lcd("%d", abs(Val.Offset));
+                    printf_lcd("%d", Val.Offset);
                     
                     //retourner sur la selection de l'offset
                     SELECTION_MENU = MENU_OFFSET;

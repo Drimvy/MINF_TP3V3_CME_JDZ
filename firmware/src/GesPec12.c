@@ -123,7 +123,6 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     //Detection flanc descendant sur B
     if(DebounceIsPressed(&DescrB))
     {
-        Pec12.InactivityDuration  = 0;
         
         // Quittance de l'événement
         DebounceClearPressed(&DescrB);
@@ -168,21 +167,23 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     {
         DebounceClearPressed(&DescrPB);
         Pec12.PressDuration = 0;
-        Pec12.InactivityDuration  = 0;
     } 
     else if(DebounceGetInput(&DescrPB) == 0) //maintien appuy�
     {
         Pec12.PressDuration++;
-        Pec12.InactivityDuration  = 0;   
     }
     else if (DebounceIsReleased(&DescrPB))//relachement
     {
         DebounceClearReleased(&DescrPB);
         if (Pec12.PressDuration < 500)
+        {
             Pec12.OK = 1;   //appui bref
+        }
+            
         else
-            Pec12.ESC = 1;  //appui long
-        Pec12.InactivityDuration  = 0;    
+        {
+            Pec12.ESC = 1;  //appui long  
+        }
     };
 
         
