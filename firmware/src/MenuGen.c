@@ -10,6 +10,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <stdbool.h>
+#include <string.h>
 #include "MenuGen.h"
 #include "Generateur.h"
 
@@ -20,6 +21,7 @@
 
 
 #define MAX_ECH 100
+const char tb_MenuFormes [4] [21] = { "Sinus", "Triangle", "DentDeScie", "Carre" };
 
 E_MENU SELECTION_MENU;
 S_No_save Val;
@@ -30,15 +32,12 @@ S_S9_Descriptor S9;
 // Initialisation du menu et des parametres
 void MENU_Initialize(S_ParamGen *pParam)
 {   
-     //INIT DE TOUTES LES VALEURS DE GESTION
-    //Valeur on deja ete init dans void  GENSIG_Initialize(S_ParamGen *pParam)
+
     // INIT valeur pour l'affichage
-    //recuperer la valeur de la frequence, l'enregister sur la variable
-    //recuperer la valeur de la frequence, l'enregister sur la variable
     Val.Forme = pParam->Forme;
     Val.Frequence = pParam->Frequence;
     Val.Amplitude = pParam->Amplitude;
-    Val.Frequence = abs(pParam->Frequence);
+    Val.Frequence = pParam->Frequence;
    
     Clear_LCD();   
     //AFFICHAGE DU MENU INITIAL
@@ -46,8 +45,8 @@ void MENU_Initialize(S_ParamGen *pParam)
     lcd_bl_on();    
     lcd_gotoxy(2,1);
     printf_lcd("Forme");         
-    lcd_gotoxy(13,1);
-    printf_lcd("%d", pParam->Forme);
+    lcd_gotoxy(11,1);
+    printf_lcd("%s", tb_MenuFormes[pParam->Forme]);
     
     //ligne 2
     lcd_gotoxy(2,2);    
@@ -68,8 +67,7 @@ void MENU_Initialize(S_ParamGen *pParam)
     printf_lcd("%d", (int)pParam->Offset);
    
     //initaliser premiemiere parametre a  pointer dans le menu
-    SELECTION_MENU = MENU_FORME;
-    
+    SELECTION_MENU = MENU_FORME;  
 }
 
 /*Design menu de sauvgade*/
@@ -79,14 +77,7 @@ void Menu_Sauvgarde()
     lcd_gotoxy(6,2);    
     printf_lcd("Sauvgarde?"); //ligne 2
     lcd_gotoxy(5,3);    
-    printf_lcd("(appui long)"); //ligne 2
-
-   /*   //INIT DE TOUTES LES VALEURS DE GESTION
-    pParam->Forme = SignalSinus;
-    pParam->Frequence = 100;        //Hz
-    pParam->Amplitude = 100;        //mV
-    pParam->Offset = 0;             //mV*/
-      
+    printf_lcd("(appui long)"); //ligne 2      
 }
 
 
@@ -104,7 +95,7 @@ void Menu_interface(S_ParamGen *pParam)
     lcd_gotoxy(2,1);
     printf_lcd("Forme");         
     lcd_gotoxy(13,1);
-    printf_lcd("%d", pParam->Forme);
+    printf_lcd("%s", tb_MenuFormes[pParam->Forme]);
     
     //ligne 2
     lcd_gotoxy(2,2);    
@@ -181,22 +172,22 @@ void MENU_Execute(S_ParamGen *pParam)
                 printf_lcd("*");
                 
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1)||(Pec12.OK == 1))
+                if(Pec12IsPlus()||Pec12IsMinus()||Pec12IsOK())
                 {
                     //incrementer choix du menu
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_FREQU;
                     }
                     //decrementer choix du menu
-                    else if (Pec12.Dec == 1)
+                    else if (Pec12IsMinus())
                     {
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_OFFSET;
                     }
                     //Valider le choix
-                    else if (Pec12.OK == 1)
+                    else if (Pec12IsOK())
                     {
                         //modifier la valeur 
                         SELECTION_MENU = MENU_FORME_VALEUR;
@@ -216,10 +207,10 @@ void MENU_Execute(S_ParamGen *pParam)
                 printf_lcd("?");
                 
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1))
+                if(Pec12IsPlus()||Pec12IsMinus())
                 {
                     //Test si incrementer la forme
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {
                         //test si egal a la Singnal carree
                         if(Val.Forme == 3)
@@ -252,14 +243,14 @@ void MENU_Execute(S_ParamGen *pParam)
                     lcd_gotoxy(1,1);
                     printf_lcd("?Forme");
                     //afficher valeur
-                    lcd_gotoxy(13,1);
-                    printf_lcd("%d", Val.Forme);
+                    lcd_gotoxy(11,1);
+                    printf_lcd("%s", tb_MenuFormes[Val.Forme]);
                 }
                 //Tester si une touche est active
-                if((Pec12.ESC == 1)||(Pec12.OK == 1))
+                if(Pec12IsOK()||Pec12IsESC())
                 {
                     //si on appuye sur ok
-                    if (Pec12.OK == 1)
+                    if (Pec12IsOK())
                     {
                         //sauvgarder la nouvelle valeur
                         pParam->Forme = Val.Forme; 
@@ -279,8 +270,8 @@ void MENU_Execute(S_ParamGen *pParam)
                     lcd_gotoxy(1,1);
                     printf_lcd("*Forme"); 
                     //afficher valeur
-                    lcd_gotoxy(13,1);
-                    printf_lcd("%d", Val.Forme);
+                    lcd_gotoxy(11,1);
+                    printf_lcd("%s", tb_MenuFormes[Val.Forme]);
                     
                     //retourner sur le menu selection 
                     SELECTION_MENU = MENU_FORME;
@@ -295,22 +286,22 @@ void MENU_Execute(S_ParamGen *pParam)
                 lcd_gotoxy(1,2);
                 printf_lcd("*");
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1)||(Pec12.OK == 1))
+                if(Pec12IsPlus()||Pec12IsMinus()||Pec12IsOK())
                 {
                     //incrementer choix du menu
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {  
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_AMPLI;
                     }
                     //decrementer choix du menu
-                    else if (Pec12.Dec == 1)
+                    else if (Pec12IsMinus())
                     {
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_FORME;
                     }
                     //Valider le choix
-                    else if (Pec12.OK == 1)
+                    else if (Pec12IsOK())
                     {
                         //modifier la valeur
                         SELECTION_MENU = MENU_FREQU_VALEUR;
@@ -330,9 +321,9 @@ void MENU_Execute(S_ParamGen *pParam)
                 
 
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1))
+                if(Pec12IsPlus()||Pec12IsMinus())
                 {
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {
                         //test si superieur ou egal a la frequence max
                         if(Val.Frequence >= 2000 )
@@ -372,10 +363,10 @@ void MENU_Execute(S_ParamGen *pParam)
                     printf_lcd("%d", Val.Frequence);
                 }
                 //Tester si une touche est active
-                if((Pec12.ESC == 1)||(Pec12.OK == 1))
+                if(Pec12IsOK()||Pec12IsESC())
                 {
                     //si on appuye sur ok
-                    if (Pec12.OK == 1)
+                    if (Pec12IsOK())
                     {
                         //sauvgarder la nouvelle valeur 
                         pParam->Frequence = Val.Frequence;
@@ -409,22 +400,22 @@ void MENU_Execute(S_ParamGen *pParam)
                 lcd_gotoxy(1,3);
                 printf_lcd("*");
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1)||(Pec12.OK == 1))
+                if(Pec12IsPlus()||Pec12IsMinus()||Pec12IsOK())
                 {
                     //incrementer choix du menu
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_OFFSET;
                     }
                     //decrementer choix du menu
-                    else if (Pec12.Dec == 1)
+                    else if (Pec12IsMinus())
                     {
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_FREQU;
                     }
                     //Valider le choix
-                    else if (Pec12.OK == 1)
+                    else if (Pec12IsOK())
                     {  
                         //modifier la valeur
                         SELECTION_MENU = MENU_AMPLI_VALEUR;
@@ -443,10 +434,10 @@ void MENU_Execute(S_ParamGen *pParam)
                 printf_lcd("?");
                
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1))
+                if(Pec12IsPlus()||Pec12IsMinus())
                 {
                     //incrementer la valeur de l'amplitude 
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {
                         //test si superieur ou egal a  l'amplitude max
                         if(Val.Amplitude >= 10000 )
@@ -484,10 +475,10 @@ void MENU_Execute(S_ParamGen *pParam)
                     printf_lcd("%3d", Val.Amplitude);
                 }
                 //Tester si une touche est active
-                if((Pec12.ESC == 1)||(Pec12.OK == 1))
+                if(Pec12IsOK()||Pec12IsESC())
                 {
                     //si on appuye sur ok
-                    if (Pec12.OK == 1)
+                    if (Pec12IsOK())
                     {
                         //sauvgarder la nouvelle valeur 
                          pParam->Amplitude = Val.Amplitude;
@@ -527,22 +518,22 @@ void MENU_Execute(S_ParamGen *pParam)
                 printf_lcd("*");
                 
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1)||(Pec12.OK == 1))
+                if(Pec12IsPlus()||Pec12IsMinus()||Pec12IsOK())
                 {
                     //incrementer choix du menu
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_FORME;
                     }
                     //decrementer choix du menu
-                    else if (Pec12.Dec == 1)
+                    else if (Pec12IsMinus())
                     {
                         //modifier la sélection du menu
                         SELECTION_MENU = MENU_AMPLI;
                     }
                     //Valider le choix
-                    else if (Pec12.OK == 1)
+                    else if (Pec12IsOK())
                     {
                         //modifier la valeur
                         SELECTION_MENU = MENU_OFFSET_VALEUR;
@@ -562,11 +553,11 @@ void MENU_Execute(S_ParamGen *pParam)
                 printf_lcd("?");
                 
                 //Tester si une touche est active
-                if((Pec12.Inc == 1)||(Pec12.Dec == 1))
+                if(Pec12IsPlus()||Pec12IsMinus())
                 {
 
                     //incrementer la valeur de l'offset 
-                    if (Pec12.Inc == 1)
+                    if (Pec12IsPlus())
                     {
                         //test si supperieur ou egal e l'offset max
                         if(Val.Offset >= 5000 )
@@ -603,10 +594,10 @@ void MENU_Execute(S_ParamGen *pParam)
                     lcd_gotoxy(13,4);
                     printf_lcd("%d", Val.Offset);
                 }
-                if((Pec12.ESC == 1)||(Pec12.OK == 1))
+                if(Pec12IsOK()||Pec12IsESC())
                 {
                     //si on appuye sur ok
-                    if (Pec12.OK == 1)
+                    if (Pec12IsOK())
                     {
 
                         //sauvgarder la nouvelle valeur 

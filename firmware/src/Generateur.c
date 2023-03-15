@@ -19,10 +19,10 @@
 
 // T.P. 2016 100 echantillons
 #define MAX_ECH 100
-#define VAL_TIC_MAX 32768
+#define VAL_TIC_MAX 32767
 //déclaration de....
 S_Amplitude Ampli;
-int tb_Amplitude[MAX_ECH];
+int32_t tb_Amplitude[MAX_ECH];
 
 // Initialisation du  générateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
@@ -41,15 +41,11 @@ void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
     //initaliser la variable
     uint16_t Periode;
     
-//    //---Calculer la période en fonction de la fréquence entrée comme paramètre----/   
-//    //diviser par le nombre d'echantillon afin 
-//    //d'obtenir la bonne fréquence pour la génération dusignal
-//    Periode = (1/(pParam->Frequence));
-//    // diviser la péride par MAX_ECH pour obtenir la période déchantillonnage
-//    Periode = Periode/MAX_ECH;
-//    //Convertir la periode en "timer compteur" pour le timer 3
-//    Periode = ((Periode * 8000) / 0.0001) - 1;
-    
+    //---Calculer la periode en fonction de la frequence entree comme parametre----/   
+    //diviser par le nombre d'echantillon afin 
+  
+    //d'obtenir la bonne fréquence pour la generation dusignal et 
+    //Convertir la periode en "timer compteur" pour le timer 3
     Periode =  (SYS_CLK_FREQ / ( (uint32_t)MAX_ECH * pParam->Frequence)) - 1;
             
             
@@ -61,9 +57,9 @@ void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
 void  GENSIG_UpdateSignal(S_ParamGen *pParam)
 { 
     //intialisation de la variable statique offset
-    uint16_t Offset;
+    int16_t Offset;
     
-    //initialisation de l'incrément
+    //initialisation de l'increment
     int i;
     
     //gestion de l'amplitude 
@@ -72,7 +68,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     Ampli.Max =((VAL_TIC_MAX)+(Ampli.Nb_Tic)-1);
     
     //gestion de l'offest
-    Offset = VAL_TIC_MAX + (pParam->Offset*(VAL_TIC_MAX/2)/5000);
+    Offset = -((pParam->Offset*VAL_TIC_MAX)/10000);
             
     
     //---Gestion de la seclection des formes des signaux---/ 
@@ -86,7 +82,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             for( i = 0; i < 100; i++)
             {
             //calcul pour obtenir un sinus
-                tb_Amplitude[i] = (Ampli.Nb_Tic/1.28)*(4/M_PI * sin( M_PI *(3.6*i)/180))+VAL_TIC_MAX+ Offset;
+                tb_Amplitude[i] = (Ampli.Nb_Tic/1.28)*(4/M_PI * sin( M_PI *(3.6*i)/180)) + VAL_TIC_MAX + Offset;
             }
         
          break;
@@ -175,10 +171,10 @@ void  GENSIG_Execute(void)
     //Initaliser EchNb à 0 en static
    static uint16_t EchNb = 0;
    //Si la valeur max est dépasser; saturation
-   if(tb_Amplitude[EchNb] > (VAL_TIC_MAX*2)-1)
+   if(tb_Amplitude[EchNb] >= (VAL_TIC_MAX*2)-1)
    {
        //obtien la valeur max (65535) dans son tableau
-       tb_Amplitude[EchNb] = (VAL_TIC_MAX*2)-1;
+       tb_Amplitude[EchNb] = 65535;
    }
    
    else if (tb_Amplitude[EchNb] < 0)
