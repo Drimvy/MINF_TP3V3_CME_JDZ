@@ -12,6 +12,7 @@
 
 #include "Generateur.h"
 #include "DefMenuGen.h"
+#include "Mc32DriverLcd.h"
 #include "Mc32gestSpiDac.h"
 #include "driver/tmr/drv_tmr_static.h"
 #include <stdint.h>
@@ -27,11 +28,28 @@ int tb_Amplitude[MAX_ECH];
 // Initialisation du  générateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
 {           
-    pParam->Amplitude = 10000;
-    pParam->Forme = 2;
-    pParam->Frequence = 100;
-    pParam->Offset = 0;   
-}
+    //Recuperation des données sauvegardée au demarrage precedent
+    NVM_ReadBlock(&pParam , sizeof(pParam));
+    
+    //Test si match de la valeur Magic
+    if (pParam.Magic == MAGIC)
+    {
+        //Garde automatiquement les valeurs precedentes sauvegardées
+        lcd_gotoxy(1,3);
+        printf_lcd("Param OK ");
+    }
+    
+    else
+    {
+        lcd_gotoxy(1,3);
+        printf_lcd("Param mismatch");
+        //Set les valeurs aux valeurs par defaut
+        pParam->Amplitude = 10000;
+        pParam->Forme = 2;
+        pParam->Frequence = 100;
+        pParam->Offset = 0;
+    }
+}//End of GENSIG_Initialize
   
 
 // Mise à jour de la periode d'échantillonage

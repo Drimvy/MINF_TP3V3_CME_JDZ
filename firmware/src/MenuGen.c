@@ -18,7 +18,6 @@
 #include "bsp.h"
 #include "GesPec12.h"
 
-
 #define MAX_ECH 100
 
 E_MENU SELECTION_MENU;
@@ -41,7 +40,8 @@ void MENU_Initialize(S_ParamGen *pParam)
     Val.Frequence = abs(pParam->Frequence);
    
     Clear_LCD();   
-    //AFFICHAGE DU MENU INITIAL
+    //AFFICHAGE DU MENU INITIAL 
+    
     //Ligne 1
     lcd_bl_on();    
     lcd_gotoxy(2,1);
@@ -147,6 +147,7 @@ void MENU_Execute(S_ParamGen *pParam)
             //clear LCD
             Clear_LCD();
             //enregistrer dans la flash
+            NVM_WriteBlock(&pParam, sizeof(pParam));
             
             Menu_interface(pParam);
             Timer_2Sec = 0;

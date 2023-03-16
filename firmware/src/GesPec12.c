@@ -102,7 +102,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     
 
        //=================================//
-      // Détection Incrément / Décrément //
+      // Detection Increment / Decrement //
      //=================================//
 //    //Detection flanc descendant sur B
 //    if(((DescrB.bits.KeyPrevInputValue == 0) && (DescrB.bits.KeyValue == 1) && (DescrA.bits.KeyValue == 1)) //
@@ -240,12 +240,12 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 
 
 
-//       Pec12IsPlus       true indique un nouveau incrément
+//       Pec12IsPlus       true indique un nouveau increment
 bool Pec12IsPlus    (void) {
    return (Pec12.Inc);
 }
 
-//       Pec12IsMinus      true indique un nouveau décrément
+//       Pec12IsMinus      true indique un nouveau decrement
 bool Pec12IsMinus    (void) {
    return (Pec12.Dec);
 }
@@ -260,7 +260,7 @@ bool Pec12IsESC    (void) {
    return (Pec12.ESC);
 }
 
-//       Pec12NoActivity   true indique abscence d'activité sur PEC12
+//       Pec12NoActivity   true indique abscence d'activite sur PEC12
 bool Pec12NoActivity    (void) {
    return (Pec12.NoActivity);
 }
