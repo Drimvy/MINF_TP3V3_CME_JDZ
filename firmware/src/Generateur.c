@@ -10,6 +10,7 @@
 
 //version final le 07.03.2023 - CME 
 
+#include "Mc32NVMUtil.h"
 #include "Generateur.h"
 #include "DefMenuGen.h"
 #include "Mc32DriverLcd.h"
@@ -28,22 +29,23 @@ int32_t tb_Amplitude[MAX_ECH];
 // Initialisation du  gÃ©nÃ©rateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
 {           
-    //Recuperation des données sauvegardée au demarrage precedent
-    NVM_ReadBlock(&pParam , sizeof(pParam));
+    //Recuperation des datas sauvegardées au demarrage precedent
+    NVM_ReadBlock((uint32_t*) pParam , 14); //Taille datas = taille structutre = 14 bytes
     
     //Test si match de la valeur Magic
-    if (pParam.Magic == MAGIC)
+    if (pParam->Magic == MAGIC)
     {
         //Garde automatiquement les valeurs precedentes sauvegardées
-        lcd_gotoxy(1,3);
-        printf_lcd("Param OK ");
+        lcd_gotoxy(1,4);
+        printf_lcd("Datas Restored");
     }
     
     else
     {
-        lcd_gotoxy(1,3);
-        printf_lcd("Param mismatch");
+        lcd_gotoxy(1,4);
+        printf_lcd("Datas Default");
         //Set les valeurs aux valeurs par defaut
+        pParam->Magic = MAGIC;
         pParam->Amplitude = 10000;
         pParam->Forme = 2;
         pParam->Frequence = 100;
@@ -56,7 +58,7 @@ void  GENSIG_Initialize(S_ParamGen *pParam)
 void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
 {
     
-    //initaliser la variable
+    //declaration de la variable Periode
     uint16_t Periode;
     
     //---Calculer la periode en fonction de la frequence entree comme parametre----/   
