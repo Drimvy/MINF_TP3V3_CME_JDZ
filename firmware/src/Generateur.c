@@ -84,7 +84,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     
     //gestion de l'amplitude 
     Ampli.Nb_Tic = (pParam->Amplitude * VAL_TIC_MAX /10000);
-    Ampli.Min = (VAL_TIC_MAX)-(Ampli.Nb_Tic);
+    Ampli.Min = ((VAL_TIC_MAX)-(Ampli.Nb_Tic)-1);
     Ampli.Max =((VAL_TIC_MAX)+(Ampli.Nb_Tic)-1);
     
     //gestion de l'offest
@@ -151,7 +151,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             for( i = 0; i < 100; i++)
             {
                 //calcul pour rénérer un dent de cie
-                tb_Amplitude[i] = (Step * i)+ Ampli.Min + Offset;
+                tb_Amplitude[i] = ((Step * i)+ Ampli.Min + Offset);
             }
 
         break;

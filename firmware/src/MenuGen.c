@@ -95,7 +95,7 @@ void Menu_interface(S_ParamGen *pParam)
 {
     lcd_gotoxy(2,1);
     printf_lcd("Forme");         
-    lcd_gotoxy(13,1);
+    lcd_gotoxy(11,1);
     printf_lcd("%s", tb_MenuFormes[pParam->Forme]);
     
     //ligne 2
