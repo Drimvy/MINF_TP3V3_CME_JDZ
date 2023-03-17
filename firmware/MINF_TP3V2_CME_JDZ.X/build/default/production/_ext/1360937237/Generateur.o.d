@@ -1,5 +1,6 @@
 build/default/production/_ext/1360937237/Generateur.o: \
- ../src/Generateur.c ../src/Generateur.h ../src/DefMenuGen.h \
+ ../src/Generateur.c ../src/Mc32NVMUtil.h ../src/Generateur.h \
+ ../src/DefMenuGen.h ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
  ../src/Mc32gestSpiDac.h \
  ../src/system_config/default/framework/driver/tmr/drv_tmr_static.h \
  ../../../../../../framework/driver/tmr/drv_tmr.h \
@@ -140,9 +141,13 @@ build/default/production/_ext/1360937237/Generateur.o: \
  ../../../../../../framework/system/clk/sys_clk_compatibility.h \
  ../../../../../../framework/driver/tmr/drv_tmr_compatibility.h
 
+../src/Mc32NVMUtil.h:
+
 ../src/Generateur.h:
 
 ../src/DefMenuGen.h:
+
+../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h:
 
 ../src/Mc32gestSpiDac.h:
 

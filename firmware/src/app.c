@@ -85,6 +85,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 APP_DATA appData;
 S_ParamGen LocalParamGen;
 
+
 //flag permettant d'initialiser l'ecran
 uint8_t flag_tour = 1 ;
 

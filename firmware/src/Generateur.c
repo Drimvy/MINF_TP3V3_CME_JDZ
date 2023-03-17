@@ -10,8 +10,10 @@
 
 //version final le 07.03.2023 - CME 
 
+#include "Mc32NVMUtil.h"
 #include "Generateur.h"
 #include "DefMenuGen.h"
+#include "Mc32DriverLcd.h"
 #include "Mc32gestSpiDac.h"
 #include "driver/tmr/drv_tmr_static.h"
 #include <stdint.h>
@@ -27,18 +29,36 @@ int32_t tb_Amplitude[MAX_ECH];
 // Initialisation du  générateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
 {           
-    pParam->Amplitude = 10000;
-    pParam->Forme = 2;
-    pParam->Frequence = 100;
-    pParam->Offset = 0;   
-}
+    //Recuperation des datas sauvegard�es au demarrage precedent
+    NVM_ReadBlock((uint32_t*) pParam , 14); //Taille datas = taille structutre = 14 bytes
+    
+    //Test si match de la valeur Magic
+    if (pParam->Magic == MAGIC)
+    {
+        //Garde automatiquement les valeurs precedentes sauvegard�es
+        lcd_gotoxy(1,4);
+        printf_lcd("Datas Restored");
+    }
+    
+    else
+    {
+        lcd_gotoxy(1,4);
+        printf_lcd("Datas Default");
+        //Set les valeurs aux valeurs par defaut
+        pParam->Magic = MAGIC;
+        pParam->Amplitude = 10000;
+        pParam->Forme = 2;
+        pParam->Frequence = 100;
+        pParam->Offset = 0;
+    }
+}//End of GENSIG_Initialize
   
 
 // Mise à jour de la periode d'échantillonage
 void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
 {
     
-    //initaliser la variable
+    //declaration de la variable Periode
     uint16_t Periode;
     
     //---Calculer la periode en fonction de la frequence entree comme parametre----/   
@@ -64,7 +84,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     
     //gestion de l'amplitude 
     Ampli.Nb_Tic = (pParam->Amplitude * VAL_TIC_MAX /10000);
-    Ampli.Min = (VAL_TIC_MAX)-(Ampli.Nb_Tic);
+    Ampli.Min = ((VAL_TIC_MAX)-(Ampli.Nb_Tic)-1);
     Ampli.Max =((VAL_TIC_MAX)+(Ampli.Nb_Tic)-1);
     
     //gestion de l'offest
@@ -131,7 +151,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             for( i = 0; i < 100; i++)
             {
                 //calcul pour rénérer un dent de cie
-                tb_Amplitude[i] = (Step * i)+ Ampli.Min + Offset;
+                tb_Amplitude[i] = ((Step * i)+ Ampli.Min + Offset);
             }
 
         break;

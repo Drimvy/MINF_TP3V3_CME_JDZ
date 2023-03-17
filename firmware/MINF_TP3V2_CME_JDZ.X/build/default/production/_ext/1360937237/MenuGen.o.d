@@ -1,6 +1,6 @@
 build/default/production/_ext/1360937237/MenuGen.o: ../src/MenuGen.c \
  ../src/MenuGen.h ../src/DefMenuGen.h ../src/Generateur.h \
- ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
+ ../src/Mc32NVMUtil.h ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h \
  ../../../../../../bsp/pic32mx_skes/bsp.h \
  ../../../../../../framework/peripheral/ports/plib_ports.h \
  ../../../../../../framework/peripheral/ports/processor/ports_processor.h \
@@ -60,6 +60,8 @@ build/default/production/_ext/1360937237/MenuGen.o: ../src/MenuGen.c \
 ../src/DefMenuGen.h:
 
 ../src/Generateur.h:
+
+../src/Mc32NVMUtil.h:
 
 ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h:
 

@@ -14,11 +14,11 @@
 #include "MenuGen.h"
 #include "Generateur.h"
 
+#include "Mc32NVMUtil.h"
 #include "DefMenuGen.h"
 #include "Mc32DriverLcd.h"
 #include "bsp.h"
 #include "GesPec12.h"
-
 
 #define MAX_ECH 100
 const char tb_MenuFormes [4] [21] = { "Sinus", "Triangle", "DentDeScie", "Carre" };
@@ -40,7 +40,8 @@ void MENU_Initialize(S_ParamGen *pParam)
     Val.Frequence = pParam->Frequence;
    
     Clear_LCD();   
-    //AFFICHAGE DU MENU INITIAL
+    //AFFICHAGE DU MENU INITIAL 
+    
     //Ligne 1
     lcd_bl_on();    
     lcd_gotoxy(2,1);
@@ -75,7 +76,7 @@ void Menu_Sauvgarde()
 {
     Clear_LCD();
     lcd_gotoxy(6,2);    
-    printf_lcd("Sauvgarde?"); //ligne 2
+    printf_lcd("Sauvegarde?"); //ligne 2
     lcd_gotoxy(5,3);    
     printf_lcd("(appui long)"); //ligne 2      
 }
@@ -94,7 +95,7 @@ void Menu_interface(S_ParamGen *pParam)
 {
     lcd_gotoxy(2,1);
     printf_lcd("Forme");         
-    lcd_gotoxy(13,1);
+    lcd_gotoxy(11,1);
     printf_lcd("%s", tb_MenuFormes[pParam->Forme]);
     
     //ligne 2
@@ -132,13 +133,15 @@ void MENU_Execute(S_ParamGen *pParam)
         //afficher le menu sauvgarde
         Menu_Sauvgarde();
         MAJ_LCD = 1;
-        //si le meintiens du bouton S9 >= à  2 sec
+        //si le maintiens du bouton S9 >= à  2 sec
         if (Timer_2Sec >= 199)
         {
+            //enregistrer les datas dans la flash
+            NVM_WriteBlock((uint32_t*)pParam, 14); //Taille datas = taille structutre = 14 bytes
+            
             //clear LCD
             Clear_LCD();
-            //enregistrer dans la flash
-            
+                        
             Menu_interface(pParam);
             Timer_2Sec = 0;
         }
@@ -150,7 +153,7 @@ void MENU_Execute(S_ParamGen *pParam)
     }
     else
     {
-        //mettre à jour l'afficgage si le menu de sauvagrde a été activé
+        //mettre à jour l'affichage si le menu de sauvegarde a été activé
         if (MAJ_LCD == 1)
         {
             //clear LCD

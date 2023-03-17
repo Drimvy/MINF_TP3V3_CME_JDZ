@@ -20,11 +20,11 @@ typedef enum  { SignalSinus, SignalTriangle, SignalDentDeScie, SignalCarre } E_F
 
 // Structure des paramètres du générateur
 typedef struct {
-      E_FormesSignal Forme;
-      int16_t Frequence;
-      int16_t Amplitude;
-      int16_t Offset;
-      uint32_t Magic;
-} S_ParamGen;
+      E_FormesSignal Forme; //32bits / 4 bytes
+      int16_t Frequence;    //16bits / 2 bytes
+      int16_t Amplitude;    //16bits / 2 bytes
+      int16_t Offset;       //16bits / 2 bytes
+      uint32_t Magic;       //32bits / 4 bytes
+} S_ParamGen;               //TOTAL : 14 bytes
 
 #endif
