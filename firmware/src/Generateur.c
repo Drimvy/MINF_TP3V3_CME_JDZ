@@ -84,7 +84,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
     
     //gestion de l'amplitude 
     Ampli.Nb_Tic = (pParam->Amplitude * VAL_TIC_MAX /10000);
-    Ampli.Min = ((VAL_TIC_MAX)-(Ampli.Nb_Tic)-1);
+    Ampli.Min = ((VAL_TIC_MAX)-(Ampli.Nb_Tic));
     Ampli.Max =((VAL_TIC_MAX)+(Ampli.Nb_Tic)-1);
     
     //gestion de l'offest
@@ -202,6 +202,7 @@ void  GENSIG_Execute(void)
        //obtien la valeur max (65535) dans son tableau
        tb_Amplitude[EchNb] = 0;
    }
+   
    //incrire la valeur de notre tableau dans le DAC sur le channel 0
    SPI_WriteToDac(0, tb_Amplitude[EchNb]);
    //incrémenter EchNb 
