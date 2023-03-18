@@ -49,8 +49,7 @@ typedef struct {
             uint8_t OK  : 1;              // événement action OK
 
 } S_S9_Descriptor;
-//Flag de détection d'appui sur S9
-uint8_t S9_Flag;
+
 
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -111,7 +110,10 @@ void Pec12ClearMinus   (void);
 void Pec12ClearOK   (void);
 //       Pec12ClearESC     annule indication action ESC
 void Pec12ClearESC   (void);
+//       Pec12ClearInactivity     annule indication action Inactivity
 void Pec12ClearInactivity   (void);
+//       S9ClearOK    annule indication action ok
+void S9ClearOK (void);
 
 
 #endif

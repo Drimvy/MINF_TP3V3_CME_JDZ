@@ -199,6 +199,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     }
     else
     {
+        //Affacer la valleur de S9
         S9.OK = 0;
     }
     
@@ -267,8 +268,7 @@ bool Pec12NoActivity    (void) {
 }
 
 bool S9_OK (void){
-    S9_Flag = 1;
-    return(S9_Flag);
+    return(S9.OK);
 }
 
 
@@ -292,10 +292,13 @@ void Pec12ClearOK   (void) {
 void Pec12ClearESC   (void) {
    Pec12.ESC = 0;
 }
-
+//       Pec12ClearInactivity      annule indication action Inactivite
 void Pec12ClearInactivity   (void) {
   Pec12.NoActivity = 0;
   Pec12.InactivityDuration = 0;
 }
-
+//       S9ClearOK     annule indication OK de S9
+void S9ClearOK (void){
+    S9.OK = 0;
+}
 
