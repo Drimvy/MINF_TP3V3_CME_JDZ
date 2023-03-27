@@ -1,21 +1,21 @@
-// GesPec12.c  Canevas pour réalisation  
+// GesPec12.c  Canevas pour rÃ©alisation  
 // C. HUBER    09/02/2015
 
 // Fonctions pour la gestion du Pec12
 //
 //
-// Principe : Il est nécessaire d'appeler cycliquement la fonction ScanPec12
+// Principe : Il est nÃ©cessaire d'appeler cycliquement la fonction ScanPec12
 //            avec un cycle de 1 ms
 //
-//  Pour la gestion du Pec12, il y a 9 fonctions à disposition :
-//       Pec12IsPlus       true indique un nouveau incrément
-//       Pec12IsMinus      true indique un nouveau décrément
+//  Pour la gestion du Pec12, il y a 9 fonctions Ã  disposition :
+//       Pec12IsPlus       true indique un nouveau incrÃ©ment
+//       Pec12IsMinus      true indique un nouveau dÃ©crÃ©ment
 //       Pec12IsOK         true indique action OK
 //       Pec12IsESC        true indique action ESC
-//       Pec12NoActivity   true indique abscence d'activité sur PEC12
+//       Pec12NoActivity   true indique abscence d'activitÃ© sur PEC12
 //  Fonctions pour quittance des indications
-//       Pec12ClearPlus    annule indication d'incrément
-//       Pec12ClearMinus   annule indication de décrément
+//       Pec12ClearPlus    annule indication d'incrÃ©ment
+//       Pec12ClearMinus   annule indication de dÃ©crÃ©ment
 //       Pec12ClearOK      annule indication action OK
 //       Pec12ClearESC     annule indication action ESC
 //
@@ -23,7 +23,7 @@
 //---------------------------------------------------------------------------
 
 
-// définitions des types qui seront utilisés dans cette application
+// dÃ©finitions des types qui seront utilisÃ©s dans cette application
 
 #include "GesPec12.h"
 #include "Mc32Debounce.h"
@@ -31,7 +31,7 @@
 #include <stdint.h>
 #include "bsp.h"
 
-#define AFK_TIME 5000 //Durée d'inactivité avant d'étaindre le rétro-éclairage
+#define AFK_TIME 5000 //DurÃ©e d'inactivitÃ© avant d'Ã©taindre le rÃ©tro-Ã©clairage
 
 // Descripteur des sinaux
 S_SwitchDescriptor DescrA;
@@ -54,12 +54,12 @@ S_S9_Descriptor S9;
 //              recoit la valeur des signaux et du boutons
 //
 // s'appuie sur le descripteur global.
-// Après l'appel le descripteur est mis à jour
+// AprÃ¨s l'appel le descripteur est mis Ã  jour
 
 // Comportement du PEC12
 // =====================
 
-// Attention 1 cran génère une pulse complète (les 4 combinaisons)
+// Attention 1 cran gÃ©nÃ¨re une pulse complÃ¨te (les 4 combinaisons)
 // D'ou traitement uniquement au flanc descendand de B
 
 // Dans le sens horaire CW:
@@ -82,13 +82,13 @@ void Pec12Init (void)
    DebounceInit(&DescrPB);
    
    // Init de la structure PEc12
-    Pec12.Inc = 0;             // �v�nement incr�ment  
-    Pec12.Dec = 0;             // �v�nement d�cr�ment 
-    Pec12.OK = 0;              // �v�nement action OK
-    Pec12.ESC = 0;             // �v�nement action ESC
-    Pec12.NoActivity = 0;      // Indication d'activit�
-    Pec12.PressDuration = 0;   // Pour dur�e pression du P.B.
-    Pec12.InactivityDuration = 0; // Dur�e inactivit�
+    Pec12.Inc = 0;             // événement incrément  
+    Pec12.Dec = 0;             // événement décrément 
+    Pec12.OK = 0;              // événement action OK
+    Pec12.ESC = 0;             // événement action ESC
+    Pec12.NoActivity = 0;      // Indication d'activité
+    Pec12.PressDuration = 0;   // Pour durée pression du P.B.
+    Pec12.InactivityDuration = 0; // Durée inactivité
   
  } // Pec12Init
 
@@ -124,16 +124,17 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     if(DebounceIsPressed(&DescrB))
     {
         
-        // Quittance de l'événement
+        // Quittance de l'Ã©vÃ©nement
         DebounceClearPressed(&DescrB);
         
         if ( DebounceGetInput (&DescrA) == 0)
         {
-           // Si A = 0 : situation CW = incrément
+           // Si A = 0 : situation CW = incrÃ©ment
            Pec12.Inc = 1;
         } 
          else
         {
+            //decrementer la valeur
             Pec12.Dec = 1;
         }
     }
@@ -162,20 +163,23 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
 //        Pec12.PressDuration = 0;
 //    }
     
-    
+    //tester sur le pec est relacher
     if(DebounceIsPressed(&DescrPB)) //appui
     {
         DebounceClearPressed(&DescrPB);
         Pec12.PressDuration = 0;
     } 
-    else if(DebounceGetInput(&DescrPB) == 0) //maintien appuy�
+   //teste si le bouton est appuyer
+    else if(DebounceGetInput(&DescrPB) == 0) //maintien appuyé
     {
+       // incrementer la duree de la pression
         Pec12.PressDuration++;
     }
+   //tester si le bouton est relacher
     else if (DebounceIsReleased(&DescrPB))//relachement
     {
         DebounceClearReleased(&DescrPB);
-        if (Pec12.PressDuration < 500)
+        if (Pec12.PressDuration < 500)// si appi est inférieur à 500ms OK
         {
             Pec12.OK = 1;   //appui bref
         }
@@ -192,7 +196,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
            //====================//
           //  Gestion BoutonS9  //
          //====================//
-    
+    //tester si le bouton est appyuer
     if(S_OK == 0)
     {
         S9.OK = 1;
@@ -212,7 +216,7 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
     //Increment ou reset du compteur AFK
     if((Pec12.Inc ==0) && (Pec12.Dec == 0) && (DescrPB.bits.KeyPrevInputValue == 1)&&(S9.OK == 0))
     {
-        //Test durée d'inactivité > 5sec
+        //Test durÃ©e d'inactivitÃ© > 5sec
         if(Pec12.InactivityDuration >= AFK_TIME)
         {
             //Pec12.InactivityDuration = 0;
@@ -221,17 +225,20 @@ void ScanPec12 (bool ValA, bool ValB, bool ValPB)
         }
         else
         {
+           //incrémenter la duree l'inactive
             Pec12.InactivityDuration ++;
         }
     }
     
     else
     {
+       //arreter l'inactiviter de LCD 
         if (Pec12.NoActivity == 1)
         {
            Pec12ClearInactivity();
            lcd_bl_on();  
         }
+       //arreter le compteur
         Pec12.InactivityDuration = 0;
     }    
 } //end of ScanPec12
@@ -273,12 +280,12 @@ bool S9_OK (void){
 
 
 //  Fonctions pour quittance des indications
-//       Pec12ClearPlus    annule indication d'incrément
+//       Pec12ClearPlus    annule indication d'incrÃ©ment
 void Pec12ClearPlus   (void) {
    Pec12.Inc = 0;
 }
 
-//       Pec12ClearMinus   annule indication de décrément
+//       Pec12ClearMinus   annule indication de dÃ©crÃ©ment
 void Pec12ClearMinus   (void) {
    Pec12.Dec = 0;
 }
