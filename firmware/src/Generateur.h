@@ -4,7 +4,7 @@
 // TP3 MenuGen 2016
 // C. HUBER  03.02.2016
 // Fichier Generateur.h
-// Prototypes des fonctions du générateur  de signal
+// Prototypes des fonctions du gÃ©nÃ©rateur  de signal
 
 #include <math.h>
 #include <stdint.h>
@@ -12,7 +12,7 @@
 
 #include "DefMenuGen.h"
 
-
+//structure amplitude
 typedef struct {
             uint16_t Nb_Tic;
             uint16_t Min;             // Amplitude min
@@ -20,15 +20,15 @@ typedef struct {
             
 } S_Amplitude;
 
-// Initialisation du  générateur
+// Initialisation du  gÃ©nÃ©rateur
 void  GENSIG_Initialize(S_ParamGen *pParam);
 
 
-// Mise à jour de la periode d'échantillonage
+// Mise Ã  jour de la periode d'Ã©chantillonage
 void  GENSIG_UpdatePeriode(S_ParamGen *pParam);
 
 
-// Mise à jour du signal (forme, amplitude, offset)
+// Mise Ã  jour du signal (forme, amplitude, offset)
 void  GENSIG_UpdateSignal(S_ParamGen *pParam);
 
 // A appeler dans int Timer3
