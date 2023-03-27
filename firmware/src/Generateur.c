@@ -2,9 +2,9 @@
 // Canevas manipulation GenSig avec menu
 // C. HUBER  09/02/2015
 // Fichier Generateur.C
-// Gestion  du générateur
+// Gestion  du gÃ©nÃ©rateur
 
-// Prévu pour signal de 40 echantillons
+// PrÃ©vu pour signal de 40 echantillons
 
 // Migration sur PIC32 30.04.2014 C. Huber
 
@@ -22,20 +22,20 @@
 // T.P. 2016 100 echantillons
 #define MAX_ECH 100
 #define VAL_TIC_MAX 32767
-//déclaration de....
+//declaration des variabes
 S_Amplitude Ampli;
 int32_t tb_Amplitude[MAX_ECH];
 
-// Initialisation du  générateur
+// Initialisation du  generateur
 void  GENSIG_Initialize(S_ParamGen *pParam)
 {           
-    //Recuperation des datas sauvegard�es au demarrage precedent
+    //Recuperation des datas sauvegardées au demarrage precedent
     NVM_ReadBlock((uint32_t*) pParam , 14); //Taille datas = taille structutre = 14 bytes
     
     //Test si match de la valeur Magic
     if (pParam->Magic == MAGIC)
     {
-        //Garde automatiquement les valeurs precedentes sauvegard�es
+        //Garde automatiquement les valeurs precedentes sauvegardées
         lcd_gotoxy(1,4);
         printf_lcd("Datas Restored");
     }
@@ -54,7 +54,7 @@ void  GENSIG_Initialize(S_ParamGen *pParam)
 }//End of GENSIG_Initialize
   
 
-// Mise à jour de la periode d'échantillonage
+// Mise Ã  jour de la periode d'Ã©chantillonage
 void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
 {
     
@@ -64,7 +64,7 @@ void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
     //---Calculer la periode en fonction de la frequence entree comme parametre----/   
     //diviser par le nombre d'echantillon afin 
   
-    //d'obtenir la bonne fréquence pour la generation dusignal et 
+    //d'obtenir la bonne frÃ©quence pour la generation dusignal et 
     //Convertir la periode en "timer compteur" pour le timer 3
     Periode =  (SYS_CLK_FREQ / ( (uint32_t)MAX_ECH * pParam->Frequence)) - 1;
             
@@ -73,7 +73,7 @@ void  GENSIG_UpdatePeriode(S_ParamGen *pParam)
     PLIB_TMR_Period16BitSet(TMR_ID_3, Periode);
 }
 
-// Mise à jour du signal (forme, amplitude, offset)
+// Mise Ã  jour du signal (forme, amplitude, offset)
 void  GENSIG_UpdateSignal(S_ParamGen *pParam)
 { 
     //intialisation de la variable statique offset
@@ -92,7 +92,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             
     
     //---Gestion de la seclection des formes des signaux---/ 
-    //Sélection forme
+    //SÃ©lection forme
     switch (pParam->Forme)
     {
     //---Entrer l'amplitude dans le tableau pour obtenir un sinus---/  
@@ -119,7 +119,7 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
 
                 if (i < 25 )
                 {
-                    //calcul pour la pente montante du triangle (du centre à la val max)
+                    //calcul pour la pente montante du triangle (du centre Ã  la val max)
                     tb_Amplitude[i] = (pParam->Amplitude * (a * i)) + VAL_TIC_MAX + Offset;
                 }
 
@@ -144,19 +144,19 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
             //initialiser la variable Sted
             uint16_t static Step;
             
-            //déterminer la valeur de step 
+            //dÃ©terminer la valeur de step 
             Step = ((Ampli.Nb_Tic*2) / MAX_ECH);
             
             //boucle for pour remplire le tableau 
             for( i = 0; i < 100; i++)
             {
-                //calcul pour rénérer un dent de cie
+                //calcul pour rÃ©nÃ©rer un dent de cie
                 tb_Amplitude[i] = ((Step * i)+ Ampli.Min + Offset);
             }
 
         break;
         }
-    //---Entrer l'amplitude dans le tableau pour obtenir un carrée---/
+    //---Entrer l'amplitude dans le tableau pour obtenir un carrÃ©e---/
         
         //ne fonctionne pas du tout
         case SignalCarre:
@@ -182,15 +182,15 @@ void  GENSIG_UpdateSignal(S_ParamGen *pParam)
 }
 
 
-// Execution du générateur
-// Fonction appelée dans Int timer3 (cycle variable variable)
+// Execution du gÃ©nÃ©rateur
+// Fonction appelÃ©e dans Int timer3 (cycle variable variable)
 
-// Version provisoire pour test du DAC à modifier
+// Version provisoire pour test du DAC Ã  modifier
 void  GENSIG_Execute(void)
 {
-    //Initaliser EchNb à 0 en static
+    //Initaliser EchNb Ã  0 en static
    static uint16_t EchNb = 0;
-   //Si la valeur max est dépasser; saturation
+   //Si la valeur max est dÃ©passer; saturation
    if(tb_Amplitude[EchNb] >= (VAL_TIC_MAX*2)-1)
    {
        //obtien la valeur max (65535) dans son tableau
@@ -205,9 +205,9 @@ void  GENSIG_Execute(void)
    
    //incrire la valeur de notre tableau dans le DAC sur le channel 0
    SPI_WriteToDac(0, tb_Amplitude[EchNb]);
-   //incrémenter EchNb 
+   //incrÃ©menter EchNb 
    EchNb++;
-   //si EchNB est supperieur à 100  
+   //si EchNB est supperieur Ã  100  
    EchNb = EchNb % MAX_ECH;
   
    
