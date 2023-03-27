@@ -169,7 +169,7 @@ void APP_Tasks ( void )
             GENSIG_Initialize(&LocalParamGen);
             //realiser le signal
             GENSIG_UpdateSignal(&LocalParamGen);
-            //mettre à jour la période
+            //mettre Ã  jour la pÃ©riode
             GENSIG_UpdatePeriode(&LocalParamGen);
             
             //Init Pec12Init
@@ -191,20 +191,22 @@ void APP_Tasks ( void )
        case APP_STATE_SERVICE_TASKS:
 
        {
+         //toggle la led2
             LED2_W = !LED2_R;
+         //Afficher le nouvel affichage lors du premier tours
             if (flag_tour == 1)
             {
                 // Initialisation du menu
                 MENU_Initialize(&LocalParamGen);
-                //remettre le flag à 0 car s'initailise une seul fois
+                //remettre le flag Ã  0 car s'initailise une seul fois
                 flag_tour = 0;
             }
 
             // Execution du menu
             MENU_Execute(&LocalParamGen);
-            // Mettre à 0 les valeurs des boutons
-            
+            //le prochaine Ã©tat est: attente
             appData.state = APP_STATE_WAIT;
+         //toogle la LED2
             LED2_W = !LED2_R;;
             
          break;
